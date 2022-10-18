@@ -9,6 +9,7 @@
     border-radius: 5px;
     border-bottom: rgb(16, 16, 26);
     transition: scale 0.2s ease-in-out;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .card_container:hover {

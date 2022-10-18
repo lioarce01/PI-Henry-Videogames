@@ -5,13 +5,14 @@ import { getGenres, getGameList } from '../../redux/actions/'
 import { sortByName, sortByRating, sortDbGames, sortByGenre } from '../../redux/actions/index'
 import GameCard from '../GameCard/GameCard'
 import Loader from '../Loader/Loader'
-import './Home.css'
+import Error from '../Error/Error'
 import SearchBar from '../Searchbar/SearchBar'
 import Pagination from '../Pagination/Pagination'
+import './Home.css'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [gamesPerPage, setGamesPerPage] = useState(15)
+  const [gamesPerPage] = useState(15)
   const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState('')
   const [error, setError] = useState(false)
@@ -60,8 +61,8 @@ const Home = () => {
   }
 
 const nextPage = (pageNumber) => {
-  setCurrentPage(pageNumber)
-}
+    setCurrentPage(pageNumber)
+  }
 
 const prevPage = (pageNumber) => {
   setCurrentPage(pageNumber)

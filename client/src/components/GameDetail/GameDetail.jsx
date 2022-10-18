@@ -20,7 +20,7 @@ const GameDetail = () => {
 
     useEffect(() => {
         dispatch(getGameDetails(id))
-        setLoading(false)
+            .then(() => setLoading(false))
     }, [dispatch, id])
 
 

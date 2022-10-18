@@ -14,7 +14,7 @@ const Loader = () => {
 
   return (
     <div className='loader'>
-        <h1>{loading[index]}</h1>
+      <h1>{loading[index]}</h1>
     </div>
   )
 }
