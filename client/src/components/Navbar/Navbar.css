@@ -64,3 +64,15 @@
     transition: all 0.3s ease;
     transform: scale(1);
 }
+
+@media screen and (max-width: 768px) {
+    .link_logo h1 {
+        font-size: 0.8rem;
+    }
+
+    .navbar_links ul li  {
+        font-size: 0.8rem;
+        margin: 0;
+        padding: 0.5rem;
+    }
+}

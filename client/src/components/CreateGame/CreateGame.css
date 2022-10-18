@@ -5,8 +5,21 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: rgb(17, 17, 29);
     color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
 }
 
 .create_title {
@@ -19,18 +32,17 @@
     display: flex;
     flex-direction: column;
     width: 800px;
-    height: 85%;
-    background-color: rgb(31, 31, 53);
+    height: 80%;
+    background-color: rgba(31, 31, 53, 0.9);
     border-radius: 5px;
     box-shadow: 0 5px 20px 0 rgb(0, 0, 0);
     padding: 1rem;
 }
 
 .create_form {
-    display: flex;
+    isplay: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
     height: 100%;
 }
 
@@ -48,15 +60,13 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    width: 70%;
-    /* padding: 0.5rem; */
+    width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
-    border: 2px solid rgb(54, 54, 92);
 
 }
 
-.create_form_info_text > div {
+.create_form_info_text .create_info_game {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,7 +76,7 @@
 
 .create_form_info_text label {
     font-size: 1.2rem;
-    margin: 0.5rem;
+    margin: 0.2rem;
 }
 
 .create_form_info_text input {
@@ -76,6 +86,9 @@
     border: none;
     outline: none;
     padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    
 }
 
 .create_form_info_text textarea {
@@ -102,24 +115,25 @@
 
 .create_form_btn {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 0.5rem;
+    height: 100%;
 }
 
 .create_form_btn button {
+    width: 120px;
+    height: 50px;
     border: 1px solid white;
     border-bottom: 5px solid white;
     border-radius: 5px;
-    background-color: rgba(23, 23, 37, 0.8);
+    background-color: rgb(20, 20, 32);
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-    width: 170px;
-    height: 50px;
+    margin: 1rem;
 }
 
 .create_form_btn button:hover {
@@ -127,4 +141,198 @@
     color: rgb(30, 30, 63);
     transition: transform 0.2s ease-in-out;
     transform: scale(1.1);
+}
+
+.parentesis_text {
+    font-size: 0.8rem;
+    color: rgb(184, 184, 184);
+}
+
+.create_game_select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.create_game_select option {
+    font-size: 1rem;
+    color: white;
+    background-color: black;
+}
+
+.create_game_select:focus {
+    outline: none;
+}
+
+.selected_platforms {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.selected_platforms div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0.5rem;
+    border: 2px solid rgb(54, 54, 92);
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+.selected_genres {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.selected_genres div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0.5rem;
+    border: 2px solid rgb(54, 54, 92);
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+.cross {
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.1rem;
+    margin-right: 0.3rem;
+    cursor: pointer;
+}
+
+/* responsive */
+
+@media screen and (max-width: 768px) {
+    .create_title {
+        display: none;
+    }
+
+    .create_container {
+        padding-top: 55px;
+        height: 99vh;
+    }
+
+    .create_form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .create_form_info {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .create_game {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 95%;
+        height: 100%;
+        background-color: rgba(31, 31, 53, 0.9);
+        border-radius: 5px;
+    }
+
+    .create_title {
+        font-size: 1.5rem;
+    }
+    
+    .create_info_game label {
+        font-size: 0.7rem;
+    }
+
+    .create_info_game input {
+        font-size: 0.7rem;
+    }
+
+    .create_info_game textarea {
+        font-size: 0.7rem;
+    }
+
+    .create_form_btn button {
+        width: 100px;
+        height: 40px;
+        font-size: 0.7rem;
+    }
+
+    .create_game_select {
+        height: 30px;
+        font-size: 0.7rem;
+    }
+
+    .create_game_select option {
+        font-size: 0.7rem;
+    }
+
+    .selected_platforms div {
+        height: 25px;
+        padding: 0.3rem;
+    }
+
+    .selected_genres {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        font-size: 0.7rem;
+        width: 100%;
+    }
+
+    .selected_genres div {
+        height: 30px;
+        padding: 0.3rem;
+    }
+
+    .cross {
+        width: 15px;
+        height: 15px;
+    }
+
+    .selected_platforms {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        font-size: 0.7rem;
+        width: 100%;
+    }
+    
+    .create_form_btn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        padding: 0;
+        margin: 0;
+    }
 }

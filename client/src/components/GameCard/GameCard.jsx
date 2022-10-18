@@ -1,8 +1,7 @@
 import React from 'react'
 import './GameCard.css'
 
-const GameCard = ({ id, name, image, genres, rating }) => {
-  //traer los 2 primeros generos del array de generos
+const GameCard = ({ name, image, genres }) => {
   const genre = genres?.slice(0, 2).join(' / ')
 
   return (

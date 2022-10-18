@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
                     name: game.name,
                     genres: game.genres.map(genre => genre.name),
                     image: game.background_image,
+                    rating: game.rating,
                 }
             });
 
@@ -42,6 +43,8 @@ router.get('/', async (req, res) => {
                     name: game.name,
                     genres: game.genres.map(genre => genre.name),
                     image: game.image,
+                    rating: game.rating,
+                    createdInDb: game.createdInDb,
                 }
             })
 
@@ -64,6 +67,7 @@ router.get('/', async (req, res) => {
                     name: game.name,
                     genres: game.genres.map(genre => genre.name),
                     image: game.background_image,
+                    rating: game.rating,
                 }
             });
 
@@ -79,10 +83,12 @@ router.get('/', async (req, res) => {
                     name: game.name,
                     genres: game.genres.map(genre => genre.name),
                     image: game.image,
+                    rating: game.rating,
+                    createdInDb: game.createdInDb,
                 }
             })
 
-            const allGames = allApiGames.concat(gamesDb);
+            const allGames = allApiGames.concat(gamesDb)
 
             if(allGames.length < 1) {
                 return res.status(404).send('No games found');
@@ -131,6 +137,7 @@ router.get('/:id', async (req, res) => {
     try {
         if(id.length > 8) {
             const game = await Videogame.findByPk(id, {
+                // recibir los datos de la tabla intermedia 
                 include: {
                     model: Genre,
                     attributes: ['name'],
@@ -149,6 +156,7 @@ router.get('/:id', async (req, res) => {
                 platforms: game.platforms,
                 image: game.image,
                 genres: game.genres.map(genre => genre.name),
+                createdInDb: game.createdInDb,
             }
 
 

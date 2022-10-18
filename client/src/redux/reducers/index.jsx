@@ -13,6 +13,7 @@ import {
 
 const initialState = {
     games: [],
+    allVideogames: [],
     game: {},
     genres: [],
 }
@@ -22,95 +23,150 @@ const rootReducer = (state = initialState, action) => {
         case GET_GAME_DETAILS:
             return {
                 ...state,
-                game: action.payload
+                game: action.payload,
             }
+
+
         case GET_GAME_LIST:
             return {
                 ...state,
-                games: action.payload
+                games: action.payload,
+                allVideogames: action.payload,
             }
+
+
         case CREATE_GAME:
             return {
                 ...state,
-                games: [...state.games, action.payload]
             }
+
+
         case GET_GAME_BY_NAME:
             return {
                 ...state,
                 games: action.payload
             }
+
+
         case SORT_BY_NAME:
-            let sortByName = action.payload === 'asc' ? 
-            state.games.sort((a, b) => {
-                if (a.name > b.name) {
-                    return 1;
+            if (action.payload === 'asc') {
+                return {
+                    ...state,
+                    games: state.games.sort((a, b) => {
+                        if (a.name > b.name) {
+                            return 1;
+                        }
+                        if (a.name < b.name) {
+                            return -1;
+                        }
+                        return 0;
+                    })
                 }
-                if (a.name < b.name) {
-                    return -1;
+            } else if (action.payload === 'desc') {
+                return {
+                    ...state,
+                    games: state.games.sort((a, b) => {
+                        if (a.name < b.name) {
+                            return 1;
+                        }
+                        if (a.name > b.name) {
+                            return -1;
+                        }
+                        return 0;
+                    })
                 }
-                return 0;
-            }) : state.games.sort((a, b) => {
-                if (a.name < b.name) {
-                    return 1;
+            } else {
+                return {
+                    ...state,
+                    games: state.allVideogames
                 }
-                if (a.name > b.name) {
-                    return -1;
-                }
-                return 0;
-            })
-            return {
-                ...state,
-                games: sortByName
             }
-        
+
         case SORT_BY_RATING:
-            let sortByRating = action.payload === 'asc' ?
-            state.games.sort((a, b) => {
-                if (a.rating > b.rating) {
-                    return 1;
+            if (action.payload === 'asc') {
+                return {
+                    ...state,
+                    games: state.games.sort((a, b) => {
+                        if (a.rating > b.rating) {
+                            return 1;
+                        }
+                        if (a.rating < b.rating) {
+                            return -1;
+                        }
+                        return 0;
+                    })
                 }
-                if (a.rating < b.rating) {
-                    return -1;
+            } else if (action.payload === 'desc') {
+                return {
+                    ...state,
+                    games: state.games.sort((a, b) => {
+                        if (a.rating < b.rating) {
+                            return 1;
+                        }
+                        if (a.rating > b.rating) {
+                            return -1;
+                        }
+                        return 0;
+                    })
                 }
-                return 0;
-            }) : state.games.sort((a, b) => {
-                if (a.rating < b.rating) {
-                    return 1;
+            } else {
+                return {
+                    ...state,
+                    games: state.allVideogames
                 }
-                if (a.rating > b.rating) {
-                    return -1;
-                }
-                return 0;
-            })
-            return {
-                ...state,
-                games: sortByRating
             }
+
         case SORT_DB_GAMES:
-            let sortDbGames = action.payload === 'db' ?
-            state.games.filter(game => typeof game.id === 'string') :
-            state.games.filter(game => typeof game.id === 'number')
-            return {
-                ...state,
-                games: action.payload === 'all' ? state.games : sortDbGames
+            let filterDbGames = state.allVideogames.filter(game => game.createdInDb)
+            if(action.payload === 'db') {
+                return {
+                    ...state,
+                    games: filterDbGames
+                }
+            } else if(action.payload === 'api') {
+                return {
+                    ...state,
+                    games: state.allVideogames.filter(game => !game.createdInDb)
+                }
+            } else {
+                return {
+                    ...state,
+                    games: state.allVideogames
+                }
             }
+
+
         case GET_GENRES:
             return {
                 ...state,
                 genres: action.payload
             }
+
+
         case SORT_BY_GENRE:
             const allGames = state.games;
-            const sortByGenre = action.payload === 'All' ? 
-            state.games 
-            : allGames.filter(game => {
-                // return only the games that have the genre selected in the filter
-                return game.genres.includes(action.payload) // returns true or false 
-            });
-            return {
-                ...state,
-                games: sortByGenre
+            if(action.payload === 'all') {
+                return {
+                    ...state,
+                    games: state.allVideogames
+                }
+            } else {
+                //si el payload es un genero, filtrar por ese genero, si no hay coincidencias, devolver un error y no filtrar nada
+                let filterByGenre = allGames.filter(game => game.genres.includes(action.payload))
+                if(filterByGenre.length === 0) {
+                    return {
+                        ...state,
+                        games: 'error'
+                    }
+                } else {
+                    return {
+                        ...state,
+                        games: filterByGenre
+                    }
+                }
             }
+
+
         default:
             return {
                 ...state

@@ -42,6 +42,15 @@ export const getGameByName = (name) => async dispatch => {
     });
 }
 
+// GET GENRES
+export const getGenres = () => async dispatch => {
+    const res = await axios.get('http://localhost:3001/genres');
+    dispatch({
+        type: GET_GENRES,
+        payload: res.data
+    });
+}
+
 // ORDER ASCENDENT AND DESCENDENT BY NAME
 export const sortByName = (payload) => {
     return {
@@ -64,15 +73,6 @@ export const sortDbGames = (payload) => {
         type: SORT_DB_GAMES,
         payload
     }
-}
-
-// GET GENRES
-export const getGenres = () => async dispatch => {
-    const res = await axios.get('http://localhost:3001/genres');
-    dispatch({
-        type: GET_GENRES,
-        payload: res.data
-    });
 }
 
 //FITLER BY GENRE
