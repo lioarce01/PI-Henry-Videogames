@@ -4,6 +4,8 @@ const router = Router();
 const axios = require('axios');
 const API_URL = 'https://api.rawg.io/api/games';
 
+//GET ALL GAMES 
+
 router.get('/', async (req, res) => {
     const { name } = req.query;
     try {
@@ -91,7 +93,7 @@ router.get('/', async (req, res) => {
             const allGames = allApiGames.concat(gamesDb)
 
             if(allGames.length < 1) {
-                return res.status(404).send('No games found');
+                return res.status(404).send({message: 'No games found'});
             } else {
                 return res.status(200).send(allGames);
             }
@@ -100,6 +102,8 @@ router.get('/', async (req, res) => {
         res.status(404).send(error);
     }
 });
+
+//CREATE GAME
 
 router.post('/', async (req, res) => {
     const { image, name, genres, description, release_date, rating, platforms } = req.body;
@@ -127,9 +131,46 @@ router.post('/', async (req, res) => {
     if(!name || !description || !platforms) {
         return res.status(400).json({message: 'Missing fields'})
     } else {
-        return res.status(200).json(newGame)
+        return res.status(200).json('Game created');
     }
 })
+
+//DELETE GAME
+
+router.delete('/', async (req, res) => {
+    const { id } = req.body;
+
+    const game = await Videogame.findByPk(id);
+
+    if(game) {
+        await game.destroy();
+        return res.status(200).json({message: 'Game deleted'})
+    } else {
+        return res.status(404).json({message: 'Game not found'})
+    }
+})
+
+//UPDATE GAME 
+
+router.put('/', async (req, res) => {
+    const { id, name, description, rating, platforms } = req.body;
+
+    const game = await Videogame.findByPk(id);
+
+    if(game) {
+        await game.update({
+            name,
+            description,
+            rating,
+            platforms
+        })
+        return res.status(200).json('Game updated')
+    } else {
+        return res.status(404).json({message: 'Game not found'})
+    }
+})
+
+//GET GAME BY ID (DETAILS)
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
@@ -137,7 +178,6 @@ router.get('/:id', async (req, res) => {
     try {
         if(id.length > 8) {
             const game = await Videogame.findByPk(id, {
-                // recibir los datos de la tabla intermedia 
                 include: {
                     model: Genre,
                     attributes: ['name'],
