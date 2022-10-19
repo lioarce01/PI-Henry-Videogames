@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getGenres, createGame } from '../../redux/actions/index'
 import validate from './validate'
-import bgVideo from '../../assets/create_bg.mp4'
+import bgVideo from '../../assets/background.mp4'
 import './CreateGame.css'
 
 const CreateGame = () => {
@@ -18,8 +18,13 @@ const CreateGame = () => {
     genres: [],
   })
 
+  const platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'iOS', 'Android', 'Mac', 'Linux', 'Web', 'Other']
   const dispatch = useDispatch()
   const genres = useSelector((state) => state.genres)
+
+  useEffect(() => {
+    dispatch(getGenres())
+  }, [dispatch])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -30,7 +35,7 @@ const CreateGame = () => {
       })
     )
     
-    if(Object.keys(errors).length === 0){
+    if (Object.keys(errors).length === 0) {
       dispatch(createGame(input))
       alert('Game created successfully')
       setInput({
@@ -43,7 +48,7 @@ const CreateGame = () => {
         genres: [],
       })
     } else {
-      alert('Fill the required fields')
+      alert('Please fill all the fields')
       return;
     }
   }
@@ -53,10 +58,12 @@ const CreateGame = () => {
       ...input,
       [e.target.name]: e.target.value,
     })
-    setErrors(validate({
-      ...input,
-      [e.target.name]: e.target.value,
-    }))
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    )
   }
   
   const handleSelectGenres = (e) => {
@@ -80,10 +87,6 @@ const CreateGame = () => {
     })
   }
 
-  useEffect(() => {
-    dispatch(getGenres())
-  }, [dispatch])
-
   const handleCancel = () => {
     if(window.confirm('Are you sure you want to cancel?')){
       setInput({
@@ -102,34 +105,33 @@ const CreateGame = () => {
 
   return (
     <div>
-      <video src={bgVideo} autoPlay loop muted type="video/mp4" id='bg-video' />
       <div className="create_container">
         <h1 className='create_title'>Create Game</h1>
         <div className="create_game">
-          <form className="create_form" onSubmit={handleSubmit}>
+          <form className="create_form" onSubmit={(e) => handleSubmit(e)}>
             <div className="create_form_info">
               <div className="create_form_info_text">
                 <div className='create_info_game'>
                   <label>Game Name</label>
-                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={handleChange} />
+                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={(e) => handleChange(e)} />
                   {errors.name && <p className="errors">{errors.name}</p>}
                 </div>
                 <div className='create_info_game'>
                   <label>Game Description</label>
-                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={handleChange} />
+                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={(e) => handleChange(e)} />
                   {errors.description && <p className="errors">{errors.description}</p>}
                 </div>
                 <div className='create_info_game'>
                   <label>Release Date</label>
-                  <input type="text" placeholder='Enter Release Date' name="release_date" value={input.release_date} onChange={handleChange} />
+                  <input type="text" placeholder='Enter Release Date' name="release_date" value={input.release_date} onChange={(e) => handleChange(e)} />
                 </div>
                 <div className='create_info_game'>
                   <label>Rating</label>
-                  <input type="number" placeholder='Enter Valid Rating' name="rating" value={input.rating} onChange={handleChange} min={0} max={5} />
+                  <input type="number" placeholder='Enter Valid Rating' name="rating" value={input.rating} onChange={(e) => handleChange(e)} min='0' max='5' />
                 </div>
                 <div className='create_info_game'>
                   <label>Genres</label>
-                  <select name="genres" className='create_game_select' onChange={handleSelectGenres}>
+                  <select name="genres" className='create_game_select' onChange={(e) => handleSelectGenres(e)}>
                     {
                       genres.map((genre) => (
                         <option key={genre.name} value={genre.name}>{genre.name}</option>
@@ -149,15 +151,13 @@ const CreateGame = () => {
                 </div>
                 <div className='create_info_game'>
                   <label>Platforms</label>
-                  <select className='create_game_select' name="platforms" onChange={handleSelectPlatforms}>
-                    <option value="PC">PC</option>
-                    <option value="PlayStation">PlayStation</option>
-                    <option value="Xbox">Xbox</option>
-                    <option value="Nintendo">Nintendo</option>
-                    <option value="iOS">iOS</option>
-                    <option value="Android">Android</option>
-                    <option value="Mac">Mac</option>
-                    <option value="Linux">Linux</option>
+                    {errors.platforms && <p className="errors">{errors.platforms}</p>}
+                  <select className='create_game_select' name="platforms" onChange={(e) => handleSelectPlatforms(e)}>
+                    {
+                      platforms.map((platform) => (
+                        <option key={platform} value={platform}>{platform}</option>
+                      ))
+                    }
                   </select>
                   <div className='selected_platforms'>
                     {
@@ -169,7 +169,6 @@ const CreateGame = () => {
                       ))
                     }
                   </div>
-                  {errors.platforms && <p className="errors">{errors.platforms}</p>}
                 </div>
                 <div className='create_info_game'>
                   <label>Image <span className='parentesis_text'>(JPG FORMAT)</span></label>
@@ -177,7 +176,7 @@ const CreateGame = () => {
                 </div>
                 <div className="create_form_btn">
                   <div>
-                    <button type="submit">Create Game</button>
+                    <button type="submit" disabled={input.name.length === 0 || input.description.length === 0 || input.platforms.length === 0}>Create</button>
                   </div>
                   <div>
                     <button type="button" onClick={handleCancel}>Cancel</button>

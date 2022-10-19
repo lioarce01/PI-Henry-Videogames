@@ -135,21 +135,6 @@ router.post('/', async (req, res) => {
     }
 })
 
-//DELETE GAME
-
-router.delete('/', async (req, res) => {
-    const { id } = req.body;
-
-    const game = await Videogame.findByPk(id);
-
-    if(game) {
-        await game.destroy();
-        return res.status(200).json({message: 'Game deleted'})
-    } else {
-        return res.status(404).json({message: 'Game not found'})
-    }
-})
-
 //UPDATE GAME 
 
 router.put('/', async (req, res) => {
@@ -167,6 +152,21 @@ router.put('/', async (req, res) => {
         return res.status(200).json('Game updated')
     } else {
         return res.status(404).json({message: 'Game not found'})
+    }
+})
+
+//DELETE GAME
+
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const game = await Videogame.findByPk(id);
+
+    if(game.createdInDb) {
+        await game.destroy();
+        return res.status(200).json('Game deleted');
+    } else {
+        return res.status(400).json('Game not found');
     }
 })
 

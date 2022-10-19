@@ -3,11 +3,11 @@
     flex-direction: column;
     width: 100%;
     height: 400px;
-    background-color: rgb(16, 16, 26);
-    border: 5px solid rgb(16, 16, 26);
+    background-color: rgb(24, 24, 24);
+    border: 5px solid rgb(24, 24, 24);
     transition: border 0.1s ease-in-out;
     border-radius: 5px;
-    border-bottom: rgb(16, 16, 26);
+    border-bottom: rgb(24, 24, 24);
     transition: scale 0.2s ease-in-out;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
@@ -24,7 +24,7 @@
     height: 500px;
     max-height: 60%;
     border-radius: 5px;
-    border-bottom: 5px solid rgb(16, 16, 26);
+    border-bottom: 5px solid rgb(24, 24, 24);
     object-fit: cover;
 }
 
@@ -44,6 +44,8 @@
     font-size: 1.3rem;
     margin-top: 1rem;
     text-align: center;
+    text-shadow: 0 0 2px white;
+    transition: border 0.1s ease-in-out;
 }
 
 .card_genres {
@@ -58,12 +60,45 @@
     border-radius: 5px;
     transition: border 0.1s ease-in-out;
     margin-bottom: 1rem;
-    font-size: 0.85rem;
-    background-color: rgb(25, 25, 41);
+    font-size: 0.80rem;
+    background-color: rgb(43, 43, 43);
+}
+
+.link_GC {
+    text-decoration: none;
+    outline: none;
+    color: white;
 }
 
 .card_genres p {
     margin-left: 0.5rem;
+}
+
+.delete_button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-left: 220px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    transform: scale(0.8);
+    transition: transform 0.2s ease-in-out;
+}
+
+.delete_button:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+    border: 1px solid rgba(255, 0, 0, 0.7);
+    color: white;
+    transform: scale(1);
 }
 
 @keyframes zoomIn {

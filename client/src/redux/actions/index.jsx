@@ -8,7 +8,8 @@ export const SORT_BY_NAME = 'SORT_BY_NAME';
 export const SORT_BY_RATING = 'SORT_BY_RATING';
 export const SORT_BY_GENRE = 'SORT_BY_GENRE';
 export const SORT_DB_GAMES = 'SORT_DB_GAMES';
-
+export const DELETE_GAME = 'DELETE_GAME';
+export const SAVE_FILTERS = 'SAVE_FILTERS';
 
 export const getGameList = () => async (dispatch) => {
     const res = await axios.get('http://localhost:3001/videogames');
@@ -19,11 +20,15 @@ export const getGameList = () => async (dispatch) => {
 };
 
 export const getGameDetails = (id) => async dispatch => {
-    const res = await axios.get(`http://localhost:3001/videogames/${id}`);
-    dispatch({
-        type: GET_GAME_DETAILS,
-        payload: res.data
-    });
+    try {
+        const res = await axios.get(`http://localhost:3001/videogames/${id}`);
+            dispatch({
+                type: GET_GAME_DETAILS,
+                payload: res.data
+            });
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 export const createGame = (game) => async dispatch => {
@@ -35,11 +40,15 @@ export const createGame = (game) => async dispatch => {
 }
 
 export const getGameByName = (name) => async dispatch => {
-    const res = await axios.get(`http://localhost:3001/videogames?name=${name}`);
-    dispatch({
-        type: GET_GAME_LIST,
-        payload: res.data
-    });
+    try {
+        const res = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+            dispatch({
+                type: GET_GAME_LIST,
+                payload: res.data
+            });
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 // GET GENRES
@@ -80,6 +89,38 @@ export const sortDbGames = (payload) => {
 export const sortByGenre = (payload) => {
     return {
         type: SORT_BY_GENRE,
+        payload
+    }
+}
+
+//DELETE GAME FROM DB
+
+
+//delete game from db and then dispatch action to delete game from state
+export const deleteGame = (id) => async dispatch => {
+    try {
+        await axios.delete(`http://localhost:3001/videogames/${id}`);
+            dispatch({
+                type: DELETE_GAME,
+                payload: id
+            });
+    } catch(e) {
+        console.log(e);
+    }
+}
+
+
+// save filters in local storage to keep them when the user refresh the page
+export const saveFilters = (payload) => {
+    return {
+        type: 'SAVE_FILTERS',
+        payload
+    }
+}
+
+export const getGameByNameError = (payload) => {
+    return {
+        type: 'GET_GAME_BY_NAME_ERROR',
         payload
     }
 }

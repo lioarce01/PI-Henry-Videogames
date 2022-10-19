@@ -1,13 +1,10 @@
 import React from 'react'
 
-const Error = () => {
-  const error = 'Error 404: Page not found'
-
-
+const Error = ({ message }) => {
 
   return (
     <div>
-      <h1 className='error'>{error}</h1>
+      <h1 className='error'>{message}</h1>
     </div>
   )
 }

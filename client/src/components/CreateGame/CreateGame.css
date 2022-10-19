@@ -6,20 +6,8 @@
     width: 100%;
     height: 100vh;
     color: white;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(12, 12, 12);
     top: 0;
-}
-
-#bg-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
 }
 
 .create_title {
@@ -33,14 +21,14 @@
     flex-direction: column;
     width: 800px;
     height: 80%;
-    background-color: rgba(31, 31, 53, 0.9);
+    background-color: rgba(26, 26, 26, 0.9);
     border-radius: 5px;
     box-shadow: 0 5px 20px 0 rgb(0, 0, 0);
     padding: 1rem;
 }
 
 .create_form {
-    isplay: flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
@@ -128,7 +116,7 @@
     border: 1px solid white;
     border-bottom: 5px solid white;
     border-radius: 5px;
-    background-color: rgb(20, 20, 32);
+    background-color: rgb(14, 14, 14);
     color: white;
     font-size: 1.1rem;
     cursor: pointer;
@@ -138,14 +126,14 @@
 
 .create_form_btn button:hover {
     background-color: white;
-    color: rgb(30, 30, 63);
+    color: rgb(31, 31, 31);
     transition: transform 0.2s ease-in-out;
     transform: scale(1.1);
 }
 
 .parentesis_text {
     font-size: 0.8rem;
-    color: rgb(184, 184, 184);
+    color: rgb(216, 216, 216);
 }
 
 .create_game_select {
@@ -185,7 +173,7 @@
     justify-content: center;
     height: 30px;
     padding: 0.5rem;
-    border: 2px solid rgb(54, 54, 92);
+    border: 2px solid rgb(48, 48, 48);
     border-radius: 5px;
     margin-right: 0.5rem;
 }
@@ -206,7 +194,7 @@
     justify-content: center;
     height: 40px;
     padding: 0.5rem;
-    border: 2px solid rgb(54, 54, 92);
+    border: 2px solid rgb(59, 59, 59);
     border-radius: 5px;
     margin-right: 0.5rem;
 }
@@ -223,6 +211,16 @@
     margin-left: 0.1rem;
     margin-right: 0.3rem;
     cursor: pointer;
+}
+
+.errors {
+    font-size: 0.8rem;
+    color: red;
+    padding: 0.2rem;
+}
+
+.btn_disabled {
+    cursor: not-allowed;
 }
 
 /* responsive */

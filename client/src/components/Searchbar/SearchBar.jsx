@@ -30,8 +30,8 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
 
             <div className="games_filters">
                 <div className="order_filter">
-                    <select className="order_select" onChange={handleSortName}>
-                        <option value="">Name</option>
+                    <select className="order_select" onChange={(e) => handleSortName(e)}>
+                        <option>Name</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>
@@ -39,10 +39,10 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
                 </div>
 
             <div className="order_filter">
-                <select className="order_select" onChange={handleSortRating}>
-                    <option value="">Rating</option>
-                    <option value="asc">Min - Max</option>
-                    <option value="desc">Max -Min</option>
+                <select className="order_select" onChange={(e) => handleSortRating(e)}>
+                    <option>Rating</option>
+                    <option value="low">1-5</option>
+                    <option value="high">5-1</option>
                 </select>
             </div>
 
@@ -52,7 +52,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
             </form>
 
             <div className="order_filter">
-                <select className="order_select" onChange={handleSortDbGames}>
+                <select className="order_select" onChange={(e) => handleSortDbGames(e)}>
                     <option value="all">All</option>
                     <option value="api">API</option>
                     <option value="db">DB</option>
@@ -60,7 +60,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
             </div>
 
             <div className="order_filter">
-              <select className="order_select" onChange={handleSortByGenre}>
+              <select className="order_select" onChange={(e) => handleSortByGenre(e)}>
                 <option value="all">All</option>
                 {
                   allGenres.map(genre => (

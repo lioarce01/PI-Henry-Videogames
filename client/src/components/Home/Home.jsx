@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { getGenres, getGameList } from '../../redux/actions/'
+import { getGenres, getGameList, deleteGame } from '../../redux/actions/'
 import { sortByName, sortByRating, sortDbGames, sortByGenre } from '../../redux/actions/index'
 import GameCard from '../GameCard/GameCard'
 import Loader from '../Loader/Loader'
-import Error from '../Error/Error'
+import Error from '../Error/Error' //eslint-disable-line
 import SearchBar from '../Searchbar/SearchBar'
 import Pagination from '../Pagination/Pagination'
+import Navbar from '../Loader/Loader'
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [gamesPerPage] = useState(15)
   const [loading, setLoading] = useState(false)
-  const [order, setOrder] = useState('')
-  const [error, setError] = useState(false)
+  const [order, setOrder] = useState('') //eslint-disable-line
+  const [error, setError] = useState(false) //eslint-disable-line
 
   const dispatch = useDispatch()
   const allVideogames = useSelector(state => state.games)
@@ -30,16 +31,22 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true)
-    setError(false)
     dispatch(getGameList())
       .then(() => setLoading(false))
       .catch(() => setError(true))
-  } , [dispatch])
+  }, [dispatch])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [allVideogames])
 
   const handleSortName = (e) => {
     e.preventDefault()
-    dispatch(sortByName(e.target.value))
-    setOrder(e.target.value)
+      dispatch(sortByName(e.target.value))
+      setOrder(e.target.value)
+      setCurrentPage(1)
   }
 
   const handleSortRating = (e) => {
@@ -52,21 +59,29 @@ const Home = () => {
     e.preventDefault()
     dispatch(sortDbGames(e.target.value))
     setOrder(e.target.value)
+    setCurrentPage(1)
   }
 
   const handleSortByGenre = (e) => {
     e.preventDefault()
     dispatch(sortByGenre(e.target.value))
+    setCurrentPage(1)
     setOrder(e.target.value)
   }
 
-const nextPage = (pageNumber) => {
+  const handleDeleteGame = (id) => {
+    dispatch(deleteGame(id))
+    alert('Game deleted successfully')
+    window.location.reload()
+  }
+
+  const nextPage = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
 
-const prevPage = (pageNumber) => {
-  setCurrentPage(pageNumber)
-}
+  const prevPage = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   return (
     <div>
@@ -75,6 +90,7 @@ const prevPage = (pageNumber) => {
         handleSortRating={handleSortRating}
         handleSortDbGames={handleSortDbGames}
         handleSortByGenre={handleSortByGenre}
+        setCurrentPage={setCurrentPage}
       />
       <Pagination
         allVideogames={allVideogames.length}
@@ -86,23 +102,30 @@ const prevPage = (pageNumber) => {
       <div className="container_home">
           <div className="games_container">
             <div className="games_list">
-              {
-                loading ? <Loader /> : 
-                 currentGames?.map((game, i) => {
-                  return (
-                    <div key={i}>
-                      <Link to={`/videogame/${game.id}`} className='link_GC'>
-                        <GameCard
-                          key={game.id}
-                          id={game.id}
-                          name={game.name}
-                          image={game.image}
-                          genres={game.genres ? game.genres : 'No genres'}
-                          />
-                      </Link>
-                    </div>
-                  )
-                })
+              { 
+                 loading 
+                 ? <Loader/>
+                 : error 
+                 ? <Error
+                    message="Error loading games"
+                  />
+                 : currentGames?.map((game, i) => {
+                    return (
+                      <div key={i}>
+                        <Link to={`/videogame/${game.id}`} className='link_GC'>
+                          <GameCard
+                            key={game.id}
+                            id={game.id}
+                            name={game.name}
+                            image={game.image}
+                            genres={game.genres ? game.genres : 'No genres'}
+                            createdInDb={game.createdInDb}
+                            handleDeleteGame={handleDeleteGame}
+                            />
+                          </Link>
+                      </div>
+                    )
+                  })
               }
           </div>
         </div>

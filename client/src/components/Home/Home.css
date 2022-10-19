@@ -5,8 +5,8 @@
     justify-content: center;
     position: absolute;
     width: 100%;
-    height: 100vh;
-    background-color: rgb(17, 17, 29);
+    height: 100%;
+    background-color: rgb(24, 24, 24);
 }
 
 .games_container {
@@ -16,9 +16,9 @@
     align-items: center;
     width: 100%;
     height: fit-content;
-    top: 160px;
+    top: 180px;
     position: absolute;
-    background-color: rgb(17, 17, 29);
+    background-color: rgb(26, 26, 26);
     padding: 1rem;
 }
 
@@ -33,7 +33,7 @@
     padding: 1.5rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: rgb(22, 22, 37);
+    background-color: rgb(34, 34, 34);
     border-radius: 5px;
     justify-content: center;
     align-items: center;
@@ -65,19 +65,14 @@
     width: 100px;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid rgb(30, 30, 63);
-    background-color: rgba(20, 20, 32 , 0.8);
+    border: 1px solid rgb(32, 32, 32);
+    background-color: rgba(32, 32, 32, 0.8);
     color: rgb(192, 192, 192);
     font-size: 1rem;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.link_GC {
-    text-decoration: none;
-    outline: none;
 }
 
 .info_pages {

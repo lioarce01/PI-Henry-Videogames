@@ -5,19 +5,19 @@ const validate = (input) => {
         errors.name = 'Name is required';
         //only letters, spaces and numbers
     } else if (!/^[A-Za-z0-9 ]+$/.test(input.name)) {
-        errors.name = 'Only letters, spaces and numbers';
+        errors.name = 'a-z, 0-9 and spaces only';
     }
 
     if(!input.description) {
         errors.description = 'Description is required';
-    } else if (!/^[A-Za-z ]+$/.test(input.description)) {
-        errors.description = 'Only letters and spaces';
+    } else if (!/^[A-Za-z0-9 ]+$/.test(input.description)) {
+        errors.description = 'a-z, 0-9 and spaces only';
     }
 
-    if(!input.platforms) {
-        errors.platforms = 'Platform is required';
+    if(!input.platforms.length) {
+        errors.platforms = 'Platforms are required';
     }
-
+    
     return errors;
 }
 

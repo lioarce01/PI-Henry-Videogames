@@ -9,13 +9,16 @@ import {
     SORT_BY_RATING,
     SORT_BY_GENRE,
     SORT_DB_GAMES,
+    DELETE_GAME,
+    SAVE_FILTERS,
 } from '../actions/index.jsx';
 
 const initialState = {
     games: [],
-    allVideogames: [],
+    allVideogames: [], 
     game: {},
     genres: [],
+    error: null,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -38,6 +41,8 @@ const rootReducer = (state = initialState, action) => {
         case CREATE_GAME:
             return {
                 ...state,
+                games: [...state.games, action.payload],
+                allVideogames: [...state.allVideogames, action.payload],
             }
 
 
@@ -82,8 +87,9 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
+
         case SORT_BY_RATING:
-            if (action.payload === 'asc') {
+            if (action.payload === 'low') {
                 return {
                     ...state,
                     games: state.games.sort((a, b) => {
@@ -96,7 +102,7 @@ const rootReducer = (state = initialState, action) => {
                         return 0;
                     })
                 }
-            } else if (action.payload === 'desc') {
+            } else if (action.payload === 'high') {
                 return {
                     ...state,
                     games: state.games.sort((a, b) => {
@@ -116,23 +122,14 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
 
+
         case SORT_DB_GAMES:
-            let filterDbGames = state.allVideogames.filter(game => game.createdInDb)
-            if(action.payload === 'db') {
-                return {
-                    ...state,
-                    games: filterDbGames
-                }
-            } else if(action.payload === 'api') {
-                return {
-                    ...state,
-                    games: state.allVideogames.filter(game => !game.createdInDb)
-                }
-            } else {
-                return {
-                    ...state,
-                    games: state.allVideogames
-                }
+            let filterDbGames = action.payload === 'db'
+                ? state.allVideogames.filter(game => game.createdInDb)
+                : state.allVideogames.filter(game => !game.createdInDb) 
+            return {
+                ...state,
+                games: action.payload === 'all' ? state.allVideogames : filterDbGames
             }
 
 
@@ -145,25 +142,32 @@ const rootReducer = (state = initialState, action) => {
 
         case SORT_BY_GENRE:
             const allGames = state.games;
-            if(action.payload === 'all') {
-                return {
-                    ...state,
-                    games: state.allVideogames
-                }
-            } else {
-                //si el payload es un genero, filtrar por ese genero, si no hay coincidencias, devolver un error y no filtrar nada
-                let filterByGenre = allGames.filter(game => game.genres.includes(action.payload))
-                if(filterByGenre.length === 0) {
-                    return {
-                        ...state,
-                        games: 'error'
-                    }
-                } else {
-                    return {
-                        ...state,
-                        games: filterByGenre
-                    }
-                }
+            const genresFiltered = action.payload === 'all'
+            ? state.allVideogames
+            : allGames.filter(game => {
+                return game.genres.find(genre => {
+                    return genre === action.payload
+                })
+            })
+            return {
+                ...state,
+                games: genresFiltered
+            }
+
+
+        case DELETE_GAME:
+            return {
+                ...state,
+                //devolver todos los juegos que no tengan el id que se esta borrando
+                games: state.games.filter(game => game.id !== action.payload),
+                allVideogames: state.allVideogames.filter(game => game.id !== action.payload)
+            }
+
+        case SAVE_FILTERS:
+            return {
+                ...state,
+                games: [...state.games, action.payload],
+                allVideogames: [...state.allVideogames, action.payload],
             }
 
 
