@@ -21,7 +21,7 @@
     flex-direction: column;
     width: 800px;
     height: 80%;
-    background-color: rgba(26, 26, 26, 0.9);
+    background-color: rgb(26, 26, 26);
     border-radius: 5px;
     box-shadow: 0 5px 20px 0 rgb(0, 0, 0);
     padding: 1rem;
@@ -171,7 +171,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 30px;
+    height: 35px;
     padding: 0.5rem;
     border: 2px solid rgb(48, 48, 48);
     border-radius: 5px;
@@ -192,7 +192,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: 35px;
     padding: 0.5rem;
     border: 2px solid rgb(59, 59, 59);
     border-radius: 5px;
@@ -232,7 +232,8 @@
 
     .create_container {
         padding-top: 55px;
-        height: 99vh;
+        height: 100vh;
+        padding-bottom: 5px;
     }
 
     .create_form {
@@ -255,7 +256,6 @@
         align-items: center;
         width: 95%;
         height: 100%;
-        background-color: rgba(31, 31, 53, 0.9);
         border-radius: 5px;
     }
 

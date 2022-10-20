@@ -24,6 +24,7 @@
     align-items: center;
     padding: 1rem;
     width: 80%;
+    min-width: 1000px;
     height: auto;
     border: 3px solid rgb(39, 39, 39);
     border-radius: 5px;
@@ -83,4 +84,33 @@
 
 .details_info p span {
     color: rgb(206, 204, 204);
+}
+
+.update_button {
+    width: 120px;
+    height: 50px;
+    margin: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background-color: rgba(0, 196, 26, 0.5);
+    border: 1px solid rgba(0, 211, 28, 0.5);
+    cursor: pointer;
+    transform: scale(0.8);
+    transition: transform 0.2s ease-in-out;
+}
+
+.update_button:hover {
+    background-color: rgba(0, 233, 31, 0.5);
+    border: 1px solid rgba(1, 223, 30, 0.5);
+    color: white;
+    transform: scale(0.9);
+}
+
+.name_update {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }

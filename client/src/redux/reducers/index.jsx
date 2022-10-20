@@ -10,7 +10,7 @@ import {
     SORT_BY_GENRE,
     SORT_DB_GAMES,
     DELETE_GAME,
-    SAVE_FILTERS,
+    UPDATE_GAME
 } from '../actions/index.jsx';
 
 const initialState = {
@@ -158,16 +158,15 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_GAME:
             return {
                 ...state,
-                //devolver todos los juegos que no tengan el id que se esta borrando
                 games: state.games.filter(game => game.id !== action.payload),
                 allVideogames: state.allVideogames.filter(game => game.id !== action.payload)
             }
 
-        case SAVE_FILTERS:
+        case UPDATE_GAME:
             return {
                 ...state,
-                games: [...state.games, action.payload],
-                allVideogames: [...state.allVideogames, action.payload],
+                games: state.games.map(game => game.id === action.payload.id ? action.payload : game),
+                allVideogames: state.allVideogames.map(game => game.id === action.payload.id ? action.payload : game)
             }
 
 

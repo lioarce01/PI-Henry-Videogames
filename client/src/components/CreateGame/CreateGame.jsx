@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getGenres, createGame } from '../../redux/actions/index'
 import validate from './validate'
-import bgVideo from '../../assets/background.mp4'
 import './CreateGame.css'
 
 const CreateGame = () => {

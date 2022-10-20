@@ -9,7 +9,7 @@ export const SORT_BY_RATING = 'SORT_BY_RATING';
 export const SORT_BY_GENRE = 'SORT_BY_GENRE';
 export const SORT_DB_GAMES = 'SORT_DB_GAMES';
 export const DELETE_GAME = 'DELETE_GAME';
-export const SAVE_FILTERS = 'SAVE_FILTERS';
+export const UPDATE_GAME = 'UPDATE_GAME';
 
 export const getGameList = () => async (dispatch) => {
     const res = await axios.get('http://localhost:3001/videogames');
@@ -109,18 +109,14 @@ export const deleteGame = (id) => async dispatch => {
     }
 }
 
-
-// save filters in local storage to keep them when the user refresh the page
-export const saveFilters = (payload) => {
-    return {
-        type: 'SAVE_FILTERS',
-        payload
-    }
-}
-
-export const getGameByNameError = (payload) => {
-    return {
-        type: 'GET_GAME_BY_NAME_ERROR',
-        payload
+export const updateGame = (id, game) => async dispatch => {
+    try {
+        const res = await axios.put(`http://localhost:3001/videogames/${id}`, game);
+            dispatch({
+                type: UPDATE_GAME,
+                payload: res.data
+            });
+    } catch(e) {
+        console.log(e);
     }
 }

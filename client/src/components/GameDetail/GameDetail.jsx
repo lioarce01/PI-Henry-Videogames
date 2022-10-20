@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getGameDetails } from '../../redux/actions'
 import Loader from '../Loader/Loader'
 import './GameDetail.css'
@@ -36,11 +36,20 @@ const GameDetail = () => {
                                 <img className='image_game' src={game.image} alt="game_image" />
                             </div>
                         <div className="details_info">
-                            <h1>{game.name}</h1>
+                            <div className="name_update">
+                                <h1>{game.name}</h1>
+                                {
+                                    game.createdInDb &&
+                                    <Link to={`/videogame/${id}/update`}>
+                                        <button className='update_button'>Update</button>
+                                    </Link>
+
+                                }
+                            </div>
                             <p>Genres: <span>{gameGenres}</span></p>
                             <p>Platforms: <span>{gamePlatforms}</span></p>
                             <p>Rating: <span>{gameRating}</span></p>
-                            <p>Released: <span>{gameReleased}</span></p>
+                            <p>Released: <span>{gameReleased}</span></p>    
                         </div>
                     </div>
                     <div className="details_lower">

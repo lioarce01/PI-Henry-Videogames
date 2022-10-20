@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getGenres, getGameList, deleteGame } from '../../redux/actions/'
+import { getGenres, getGameList, deleteGame, updateGame } from '../../redux/actions/'
 import { sortByName, sortByRating, sortDbGames, sortByGenre } from '../../redux/actions/index'
 import GameCard from '../GameCard/GameCard'
 import Loader from '../Loader/Loader'
@@ -111,7 +111,6 @@ const Home = () => {
                  : currentGames?.map((game, i) => {
                     return (
                       <div key={i}>
-                        <Link to={`/videogame/${game.id}`} className='link_GC'>
                           <GameCard
                             key={game.id}
                             id={game.id}
@@ -121,7 +120,6 @@ const Home = () => {
                             createdInDb={game.createdInDb}
                             handleDeleteGame={handleDeleteGame}
                             />
-                          </Link>
                       </div>
                     )
                   })

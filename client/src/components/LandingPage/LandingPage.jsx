@@ -11,9 +11,11 @@ const LandingPage = () => {
             <div className="info-wrapper">
                 <h1 className='landing_title'>Welcome to my Videogames Page</h1>
                 <p className='landing_text'>This is a project made with React, Redux, Express, Sequelize and PostgreSQL</p>
-                <Link to='/home'>
-                    <button className="landing_btn">Play</button>
-                </Link>
+                    <button className="landing_btn">
+                      <Link to='/home' className='btn_link'>
+                        <span>Enter</span>
+                      </Link>
+                    </button>
             </div>
         </div>
     </div>
