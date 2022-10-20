@@ -120,7 +120,7 @@ router.post('/', async (req, res) => {
     })
 
 
-    const gameGenres = await Genre.findAll({ 
+    const gameGenres = await Genre.findAll({
         where: {
             name: genres
         }
@@ -137,21 +137,27 @@ router.post('/', async (req, res) => {
 
 //UPDATE GAME 
 
-router.put('/', async (req, res) => {
-    const { id, name, description, rating, platforms } = req.body;
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, description, release_date, rating, platforms } = req.body;
 
     const game = await Videogame.findByPk(id);
 
-    if(game) {
+    if(!game) {
+        return res.status(404).json({message: 'Game not found'});
+    } else {
         await game.update({
+            image,
             name,
             description,
+            release_date,
             rating,
-            platforms
+            platforms,
+            image,
+            genres,
         })
-        return res.status(200).json('Game updated')
-    } else {
-        return res.status(404).json({message: 'Game not found'})
+        
+        return res.status(200).json({message: 'Game updated'});
     }
 })
 
