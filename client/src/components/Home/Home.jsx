@@ -7,7 +7,6 @@ import Loader from '../Loader/Loader'
 import Error from '../Error/Error' //eslint-disable-line
 import SearchBar from '../Searchbar/SearchBar'
 import Pagination from '../Pagination/Pagination'
-import Navbar from '../Loader/Loader'
 import './Home.css'
 import { Link } from 'react-router-dom'
 
