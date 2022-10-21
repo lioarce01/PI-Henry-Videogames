@@ -6,8 +6,8 @@ export const GET_GAME_BY_NAME = 'GET_GAME_BY_NAME';
 export const CREATE_GAME = 'CREATE_GAME';
 export const SORT_BY_NAME = 'SORT_BY_NAME';
 export const SORT_BY_RATING = 'SORT_BY_RATING';
-export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
-export const FILTER_DB_GAMES = 'FILTER_DB_GAMES';
+export const SORT_BY_GENRE = 'SORT_BY_GENRE';
+export const SORT_DB_GAMES = 'SORT_DB_GAMES';
 export const DELETE_GAME = 'DELETE_GAME';
 export const UPDATE_GAME = 'UPDATE_GAME';
 
@@ -79,7 +79,7 @@ export const sortByRating = (payload) => {
 // FILTER BY DB GAMES OR API GAMES
 export const sortDbGames = (payload) => {
     return {
-        type: FILTER_DB_GAMES,
+        type: SORT_DB_GAMES,
         payload
     }
 }
@@ -88,15 +88,13 @@ export const sortDbGames = (payload) => {
 
 export const sortByGenre = (payload) => {
     return {
-        type: FILTER_BY_GENRE,
+        type: SORT_BY_GENRE,
         payload
     }
 }
 
 //DELETE GAME FROM DB
 
-
-//delete game from db and then dispatch action to delete game from state
 export const deleteGame = (id) => async dispatch => {
     try {
         await axios.delete(`http://localhost:3001/videogames/${id}`);
@@ -108,6 +106,8 @@ export const deleteGame = (id) => async dispatch => {
         console.log(e);
     }
 }
+
+//UPDATE GAME FROM DATABASE WITH ID AND NEW DATA
 
 export const updateGame = (id, game) => async dispatch => {
     try {

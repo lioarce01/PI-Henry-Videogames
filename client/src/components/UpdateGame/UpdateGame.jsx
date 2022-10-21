@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import { getGenres, updateGame } from '../../redux/actions'
+import { useHistory, useParams } from 'react-router-dom'
 import validate from '../CreateGame/validate'
 import './UpdateGame.css'
 
 const UpdateGame = () => {
   const [errors, setErrors] = useState({})
   const [input, setInput] = useState({
-    id: '',
     name: '',
     description: '',
     release_date: '',
@@ -22,51 +21,11 @@ const UpdateGame = () => {
   const dispatch = useDispatch()
   const genres = useSelector((state) => state.genres)
   const { id } = useParams()
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getGenres())
   }, [dispatch])
-
-  const handleSelectGenres = (e) => {
-    setInput({ 
-      ...input,
-      genres: [...input.genres, e.target.value]
-    })
-  }
-
-  const handleSelectPlatforms = (e) => {
-    setInput({
-      ...input,
-      platforms: [...input.platforms, e.target.value]
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    )
-    
-    if (Object.keys(errors).length === 0) {
-      dispatch(updateGame(input))
-      alert('Game created successfully')
-      setInput({
-        name: '',
-        description: '',
-        release_date: '',
-        rating: '',
-        image: '',
-        platforms: [],
-        genres: [],
-      })
-    } else {
-      alert('Please fill all the fields')
-      return;
-    }
-  }
 
   const handleChange = (e) => {
     setInput({
@@ -80,12 +39,40 @@ const UpdateGame = () => {
       })
     )
   }
+  
+  const handleSelectGenres = (e) => {
+    if (input.genres.includes(e.target.value)) {
+      setInput({
+        ...input,
+        genres: input.genres.filter((g) => g !== e.target.value),
+      })
+    } else {
+      setInput({
+        ...input,
+        genres: [...input.genres, e.target.value],
+      })
+    }
+  }
 
-  const handleImage = (e) => {
-    setInput({
-      ...input,
-      image: e.target.value
-    })
+  const handleSelectPlatforms = (e) => {
+    if (input.platforms.includes(e.target.value)) {
+      setInput({
+        ...input,
+        platforms: input.platforms.filter((p) => p !== e.target.value),
+      })
+    } else {
+      setInput({
+        ...input,
+        platforms: [...input.platforms, e.target.value],
+      })
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(updateGame(id, input))
+    alert('Game updated successfully')
+    history.push('/home')
   }
 
   return (
@@ -155,7 +142,7 @@ const UpdateGame = () => {
             </div>
             <div className="update_form_input">
               <label>Image <span className='jpg_format'>(JPG Format)</span></label>
-              <input type="text" placeholder='Image URL' name='image' value={input.image} onChange={handleImage} />
+              <input type="text" placeholder='Image URL' name='image' value={input.image} onChange={handleChange} />
             </div>
           </div>
           <div className="update_form_buttons">

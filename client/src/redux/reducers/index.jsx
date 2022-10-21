@@ -7,8 +7,8 @@ import {
     CREATE_GAME, 
     SORT_BY_NAME,
     SORT_BY_RATING,
-    FILTER_BY_GENRE,
-    FILTER_DB_GAMES,
+    SORT_BY_GENRE,
+    SORT_DB_GAMES,
     DELETE_GAME,
     UPDATE_GAME
 } from '../actions/index.jsx';
@@ -33,13 +33,15 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 games: action.payload,
-                allVideogames: action.payload
+                allVideogames: action.payload,
             }
 
 
         case CREATE_GAME:
             return {
                 ...state,
+                games: [...state.games, action.payload],
+                allVideogames: [...state.allVideogames, action.payload],
             }
 
 
@@ -120,7 +122,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
 
-        case FILTER_DB_GAMES:
+        case SORT_DB_GAMES:
             let filterDbGames = action.payload === 'db'
                 ? state.allVideogames.filter(game => game.createdInDb)
                 : state.allVideogames.filter(game => !game.createdInDb) 
@@ -137,7 +139,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
 
-        case FILTER_BY_GENRE:
+        case SORT_BY_GENRE:
             const allGames = state.games;
             const genresFiltered = action.payload === 'all'
             ? state.allVideogames

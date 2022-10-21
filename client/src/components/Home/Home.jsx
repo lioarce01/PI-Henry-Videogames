@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getGenres, getGameList, deleteGame, updateGame } from '../../redux/actions/'
+import { getGenres, getGameList, deleteGame } from '../../redux/actions/'
 import { sortByName, sortByRating, sortDbGames, sortByGenre } from '../../redux/actions/index'
 import GameCard from '../GameCard/GameCard'
 import Loader from '../Loader/Loader'
@@ -12,7 +12,7 @@ import './Home.css'
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [gamesPerPage] = useState(15)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false) //eslint-disable-line
   const [order, setOrder] = useState('') //eslint-disable-line
   const [error, setError] = useState(false) //eslint-disable-line
 
@@ -28,7 +28,10 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
+    setLoading(true)
     dispatch(getGameList())
+    .then(() => setLoading(false))
+    .catch(() => setError(true))
   }, [dispatch])
 
   const handleSortName = (e) => {

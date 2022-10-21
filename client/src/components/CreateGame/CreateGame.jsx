@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getGenres, createGame } from '../../redux/actions/index'
+import { useHistory } from 'react-router-dom'
 import validate from './validate'
 import './CreateGame.css'
 
@@ -20,6 +21,8 @@ const CreateGame = () => {
   const platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'iOS', 'Android', 'Mac', 'Linux', 'Web', 'Other']
   const dispatch = useDispatch()
   const genres = useSelector((state) => state.genres)
+  const history = useHistory()
+
 
   useEffect(() => {
     dispatch(getGenres())
@@ -37,15 +40,7 @@ const CreateGame = () => {
     if (Object.keys(errors).length === 0) {
       dispatch(createGame(input))
       alert('Game created successfully')
-      setInput({
-        name: '',
-        description: '',
-        release_date: '',
-        rating: '',
-        image: '',
-        platforms: [],
-        genres: [],
-      })
+      history.push('/home')
     } else {
       alert('Please fill all the fields')
       return;

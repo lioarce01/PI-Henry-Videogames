@@ -2,12 +2,12 @@ const { Router } = require('express');
 const { Videogame, Genre } = require('../db.js');
 const router = Router();
 const axios = require('axios');
-const API_URL = 'https://api.rawg.io/api/';
+const API_URL = 'https://api.rawg.io/api/genres';
 
 router.get('/', async (req, res) => {
 
     try {
-        const responseApi = await axios.get(`${API_URL}genres?key=${process.env.API_KEY}`);
+        const responseApi = await axios.get(`${API_URL}?key=${process.env.API_KEY}`);
     
     const genres = responseApi.data.results
 

@@ -139,25 +139,22 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, description, release_date, rating, platforms, genres, image } = req.body;
+    const { name, description, rating, platforms, genres, image } = req.body;
 
     const game = await Videogame.findByPk(id);
 
     if(!game) {
-        return res.status(404).json({message: 'Game not found'});
+        return res.status(404).json({message: 'Game not found'})
     } else {
         await game.update({
             name,
             description,
-            release_date,
             rating,
             platforms,
-            image,
             genres,
-
+            image
         })
-        
-        return res.status(200).json({message: 'Game updated'});
+        return res.status(200).json({message: 'Game updated'})
     }
 })
 
