@@ -8,7 +8,6 @@ import Error from '../Error/Error' //eslint-disable-line
 import SearchBar from '../Searchbar/SearchBar'
 import Pagination from '../Pagination/Pagination'
 import './Home.css'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -29,17 +28,8 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    setLoading(true)
     dispatch(getGameList())
-      .then(() => setLoading(false))
-      .catch(() => setError(true))
   }, [dispatch])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [allVideogames])
 
   const handleSortName = (e) => {
     e.preventDefault()
@@ -74,6 +64,13 @@ const Home = () => {
     window.location.reload()
   }
 
+  const handleReset = (e) => {
+    e.preventDefault()
+    dispatch(getGameList())
+    setCurrentPage(1)
+  }
+
+  
   const nextPage = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
@@ -90,6 +87,7 @@ const Home = () => {
         handleSortDbGames={handleSortDbGames}
         handleSortByGenre={handleSortByGenre}
         setCurrentPage={setCurrentPage}
+        handleReset={handleReset}
       />
       <Pagination
         allVideogames={allVideogames.length}

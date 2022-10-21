@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getGameByName } from '../../redux/actions'
 import './SearchBar.css'
 
-const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handleSortDbGames }) => {
+const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handleSortDbGames, handleReset }) => {
     const [input, setInput] = useState('')
     const dispatch = useDispatch()
     const allGenres = useSelector(state => state.genres)
@@ -35,7 +35,6 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>
-
                 </div>
 
             <div className="order_filter">
@@ -69,6 +68,8 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
                 }
               </select>
             </div>
+
+            <button className="reset_btn" onClick={(e) => handleReset(e)}>Reset Filters</button>
 
           </div>
         </div>
