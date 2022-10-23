@@ -21,7 +21,7 @@ const CreateGame = () => {
   const platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'iOS', 'Android', 'Mac', 'Linux', 'Web', 'Other']
   const dispatch = useDispatch()
   const genres = useSelector((state) => state.genres)
-  const history = useHistory()
+  const history = useHistory() // eslint-disable-line
 
 
   useEffect(() => {
@@ -29,23 +29,31 @@ const CreateGame = () => {
   }, [dispatch])
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    )
-    
-    if (Object.keys(errors).length === 0) {
-      dispatch(createGame(input))
-      alert('Game created successfully')
-      history.push('/home')
-    } else {
-      alert('Please fill all the fields')
-      return;
-    }
-  }
+    e.preventDefault();
+        setErrors(
+            validate({
+                ...input,
+                [e.target.name]: e.target.value,
+            })
+        );
+
+        if(Object.keys(errors).length === 0){
+            dispatch(createGame(input))
+            alert('Game created successfully')
+            history.push('/home')
+            setInput({
+              name: '',
+              description: '',
+              release_date: '',
+              rating: '',
+              image: '',
+              platforms: [],
+              genres: [],
+            })
+        } else {
+            alert('Game not created. Please check the errors')
+        }
+ }  
 
   const handleChange = (e) => {
     setInput({
@@ -60,24 +68,17 @@ const CreateGame = () => {
     )
   }
   
-  const handleSelectGenres = (e) => {
-    setInput({ 
+  const handleChangeGenres = (e) => {
+    setInput({
       ...input,
-      genres: [...input.genres, e.target.value]
+      genres: [...input.genres, e.target.value],
     })
   }
 
-  const handleSelectPlatforms = (e) => {
+  const handleChangePlatforms = (e) => {
     setInput({
       ...input,
       platforms: [...input.platforms, e.target.value]
-    })
-  }
-
-  const handleImage = (e) => {
-    setInput({
-      ...input,
-      image: e.target.value
     })
   }
 
@@ -92,6 +93,7 @@ const CreateGame = () => {
         platforms: [],
         genres: [],
       })
+      setErrors({})
     } else {
       return;
     }
@@ -102,18 +104,18 @@ const CreateGame = () => {
       <div className="create_container">
         <h1 className='create_title'>Create Game</h1>
         <div className="create_game">
-          <form className="create_form" onSubmit={(e) => handleSubmit(e)}>
+          <form className="create_form" onSubmit={handleSubmit}>
             <div className="create_form_info">
               <div className="create_form_info_text">
                 <div className='create_info_game'>
                   <label>Game Name</label>
-                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={(e) => handleChange(e)} />
                   {errors.name && <p className="errors">{errors.name}</p>}
+                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={(e) => handleChange(e)} />
                 </div>
                 <div className='create_info_game'>
                   <label>Game Description</label>
-                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={(e) => handleChange(e)} />
                   {errors.description && <p className="errors">{errors.description}</p>}
+                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={(e) => handleChange(e)} />
                 </div>
                 <div className='create_info_game'>
                   <label>Release Date</label>
@@ -125,7 +127,7 @@ const CreateGame = () => {
                 </div>
                 <div className='create_info_game'>
                   <label>Genres</label>
-                  <select name="genres" className='create_game_select' onChange={(e) => handleSelectGenres(e)}>
+                  <select className='create_game_select' onChange={(e) => handleChangeGenres(e)}>
                     {
                       genres.map((genre) => (
                         <option key={genre.name} value={genre.name}>{genre.name}</option>
@@ -146,7 +148,8 @@ const CreateGame = () => {
                 <div className='create_info_game'>
                   <label>Platforms</label>
                     {errors.platforms && <p className="errors">{errors.platforms}</p>}
-                  <select className='create_game_select' name="platforms" onChange={(e) => handleSelectPlatforms(e)}>
+                  <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)}>
+                    <option>Select Platform</option>
                     {
                       platforms.map((platform) => (
                         <option key={platform} value={platform}>{platform}</option>
@@ -166,7 +169,7 @@ const CreateGame = () => {
                 </div>
                 <div className='create_info_game'>
                   <label>Image <span className='parentesis_text'>(JPG FORMAT)</span></label>
-                  <input type="text" placeholder='Enter JPG format file URL' name="image" value={input.image} onChange={handleImage} />
+                  <input type="text" placeholder='Enter JPG format file URL' name="image" value={input.image} onChange={handleChange} />
                 </div>
                 <div className="create_form_btn">
                   <div>

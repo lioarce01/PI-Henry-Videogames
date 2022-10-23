@@ -41,17 +41,19 @@ const UpdateGame = () => {
   }
   
   const handleSelectGenres = (e) => {
-    if (input.genres.includes(e.target.value)) {
-      setInput({
-        ...input,
-        genres: input.genres.filter((g) => g !== e.target.value),
-      })
-    } else {
-      setInput({
+    //update the state of the input with the selected genres
+    setInput({
+      ...input,
+      genres: [...input.genres, e.target.value],
+    })
+
+    //update the state of the errors with the selected genres
+    setErrors(
+      validate({
         ...input,
         genres: [...input.genres, e.target.value],
       })
-    }
+    )
   }
 
   const handleSelectPlatforms = (e) => {
@@ -72,7 +74,7 @@ const UpdateGame = () => {
     e.preventDefault()
     dispatch(updateGame(id, input))
     alert('Game updated successfully')
-    history.push('/home')
+    history.push(`/videogame/${id}`)
   }
 
   return (

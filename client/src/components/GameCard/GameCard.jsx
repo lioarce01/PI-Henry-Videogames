@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './GameCard.css'
 
-const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, handleUpdateGame }) => {
+const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb }) => {
+  //mostrar solo los primeros 2 generos del array de generos
+  const gameGenres = genres?.map(genre => genre).slice(0, 2).join(' / ') || 'No genres'
 
   return (
     <Link to={`/videogame/${id}`} className='link_GC'>
@@ -23,7 +25,11 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, hand
                   
                   <div className="card_genres">
                       <p>Genres:</p>
-                      <p>{genres?.slice(0, 2).join(' / ')}</p>
+                      <p>
+                        {
+                          gameGenres
+                        }
+                      </p>
                   </div>
                 </div>
           </div>
