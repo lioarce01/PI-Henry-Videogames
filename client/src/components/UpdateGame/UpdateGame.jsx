@@ -72,9 +72,25 @@ const UpdateGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(updateGame(id, input))
-    alert('Game updated successfully')
-    history.push(`/videogame/${id}`)
+    if (Object.keys(errors).length === 0) {
+      dispatch(updateGame(id, input))
+      alert('Game updated successfully')
+      history.push(`/videogame/${id}`)
+    } else {
+      alert('Please complete all required fields')
+    }
+
+    setInput({
+      name: '',
+      description: '',
+      release_date: '',
+      rating: '',
+      image: '',
+      platforms: [],
+      genres: [],
+    })
+
+    setErrors({})
   }
 
   return (
@@ -148,7 +164,7 @@ const UpdateGame = () => {
             </div>
           </div>
           <div className="update_form_buttons">
-            <button className="update_form_button">Update</button>
+            <button className="update_form_button" disabled={Object.keys(errors).length > 0 || input.name === '' || input.description === '' || input.platforms.length === 0}>Update</button>
           </div>
         </form>
       </div>
