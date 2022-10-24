@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './GameCard.css'
 
-const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb }) => {
-  //mostrar solo los primeros 2 generos del array de generos
+const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rating }) => {
   const gameGenres = genres?.map(genre => genre).slice(0, 2).join(' / ') || 'No genres'
+  const star = '★'
+  const ratingStars = star.repeat(rating).padEnd(5, '☆')
 
   return (
     <Link to={`/videogame/${id}`} className='link_GC'>
@@ -21,6 +22,10 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb }) =>
                         createdInDb && <button className='delete_button' onClick={() => handleDeleteGame(id)}>X</button>
                       }
                     </div>
+                  </div>
+
+                  <div>
+                    <p>Rating: <span>{ratingStars}</span></p>
                   </div>
                   
                   <div className="card_genres">

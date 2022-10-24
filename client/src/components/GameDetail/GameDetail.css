@@ -55,7 +55,7 @@
 .details_lower p {
     padding: 1.5rem;
     text-align: justify;
-    color: rgb(206, 204, 204);
+    color: rgb(179, 179, 179);
     font-size: 0.9rem;
 }
 
@@ -83,7 +83,8 @@
 }
 
 .details_info p span {
-    color: rgb(206, 204, 204);
+    color: rgb(179, 179, 179);
+    font-size: 1rem;
 }
 
 .update_button {

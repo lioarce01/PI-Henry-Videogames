@@ -118,6 +118,7 @@ const Home = () => {
                             name={game.name}
                             image={game.image}
                             genres={game.genres ? game.genres : 'No genres'}
+                            rating={game.rating}
                             createdInDb={game.createdInDb}
                             handleDeleteGame={handleDeleteGame}
                             />

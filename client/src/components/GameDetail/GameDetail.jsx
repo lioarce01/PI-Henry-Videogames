@@ -7,16 +7,16 @@ import './GameDetail.css'
 
 const GameDetail = () => {
     const [loading, setLoading] = useState(true)
-    const stars = ['⭐', '⭐', '⭐', '⭐', '⭐']
     const game = useSelector(state => state.game)
     const {id} = useParams()
     const dispatch = useDispatch()
 
-    const gameRating = game.rating ? stars.slice(0, game.rating).join('') : 'No rating'
     const gameReleased = game.release_date ? game.release_date.split('-').reverse().join('/') : 'No release date'
     const gameGenres = game.genres ? game.genres.map(genre => genre).join(' / ') : 'No genres'
     const gamePlatforms = game.platforms ? game.platforms?.map(platform => platform).join(' / ') : 'No platforms'
     const gameDescription = game.description ? game.description.substring(0, 600) : 'No description'
+    const star = '★'
+    const ratingStars = star.repeat(game.rating).padEnd(5, '☆')
 
     useEffect(() => {
         dispatch(getGameDetails(id))
@@ -48,7 +48,7 @@ const GameDetail = () => {
                             </div>
                             <p>Genres: <span>{gameGenres}</span></p>
                             <p>Platforms: <span>{gamePlatforms}</span></p>
-                            <p>Rating: <span>{gameRating}</span></p>
+                            <p>Rating: <span>{ratingStars}</span></p>
                             <p>Released: <span>{gameReleased}</span></p>    
                         </div>
                     </div>
