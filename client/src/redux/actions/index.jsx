@@ -12,7 +12,7 @@ export const DELETE_GAME = 'DELETE_GAME';
 export const UPDATE_GAME = 'UPDATE_GAME';
 
 export const getGameList = () => async (dispatch) => {
-    const res = await axios.get('http://localhost:3001/videogames');
+    const res = await axios.get('/videogames');
     return dispatch({
         type: GET_GAME_LIST,
         payload: res.data
@@ -21,7 +21,7 @@ export const getGameList = () => async (dispatch) => {
 
 export const getGameDetails = (id) => async dispatch => {
     try {
-        const res = await axios.get(`http://localhost:3001/videogames/${id}`);
+        const res = await axios.get(`/videogames/${id}`);
             dispatch({
                 type: GET_GAME_DETAILS,
                 payload: res.data
@@ -32,7 +32,7 @@ export const getGameDetails = (id) => async dispatch => {
 }
 
 export const createGame = (game) => async dispatch => {
-    const res = await axios.post('http://localhost:3001/videogames', game);
+    const res = await axios.post('/videogames', game);
     dispatch({
         type: CREATE_GAME,
         payload: res.data
@@ -41,7 +41,7 @@ export const createGame = (game) => async dispatch => {
 
 export const getGameByName = (name) => async dispatch => {
     try {
-        const res = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+        const res = await axios.get(`/videogames?name=${name}`);
             dispatch({
                 type: GET_GAME_LIST,
                 payload: res.data
@@ -53,7 +53,7 @@ export const getGameByName = (name) => async dispatch => {
 
 // GET GENRES
 export const getGenres = () => async dispatch => {
-    const res = await axios.get('http://localhost:3001/genres');
+    const res = await axios.get('/genres');
     dispatch({
         type: GET_GENRES,
         payload: res.data
@@ -97,7 +97,7 @@ export const sortByGenre = (payload) => {
 
 export const deleteGame = (id) => async dispatch => {
     try {
-        await axios.delete(`http://localhost:3001/videogames/${id}`);
+        await axios.delete(`/videogames/${id}`);
             dispatch({
                 type: DELETE_GAME,
                 payload: id
@@ -111,7 +111,7 @@ export const deleteGame = (id) => async dispatch => {
 
 export const updateGame = (id, game) => async dispatch => {
     try {
-        const res = await axios.put(`http://localhost:3001/videogames/${id}`, game);
+        const res = await axios.put(`/videogames/${id}`, game);
             dispatch({
                 type: UPDATE_GAME,
                 payload: res.data
