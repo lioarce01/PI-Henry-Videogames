@@ -43,7 +43,6 @@ const GameDetail = () => {
                                     <Link to={`/videogame/${id}/update`}>
                                         <button className='update_button'>Update</button>
                                     </Link>
-
                                 }
                             </div>
                             <p>Genres: <span>{gameGenres}</span></p>

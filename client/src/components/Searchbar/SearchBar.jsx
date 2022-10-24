@@ -27,7 +27,6 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
   return (
     <div>
         <div className="search_container">
-
             <div className="games_filters">
                 <div className="order_filter">
                     <select className="order_select" onChange={(e) => handleSortName(e)}>
