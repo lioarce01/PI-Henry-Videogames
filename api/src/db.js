@@ -28,7 +28,7 @@ let sequelize = proces.env.NODE_ENV === 'production'
     },
     ssl: true,
   })
-  : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
+  : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
     logging: false,
     native: false,
   });
