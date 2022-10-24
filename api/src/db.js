@@ -8,6 +8,7 @@ const {
 
 const sequelize = new Sequelize({
   logging: false,
+  dialect: 'postgres',
   database: DB_NAME,
   username: DB_USER,
   password: DB_PASSWORD,
