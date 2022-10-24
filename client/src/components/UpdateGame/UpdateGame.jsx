@@ -41,13 +41,11 @@ const UpdateGame = () => {
   }
   
   const handleSelectGenres = (e) => {
-    //update the state of the input with the selected genres
     setInput({
       ...input,
       genres: [...input.genres, e.target.value],
     })
 
-    //update the state of the errors with the selected genres
     setErrors(
       validate({
         ...input,
@@ -68,6 +66,13 @@ const UpdateGame = () => {
         platforms: [...input.platforms, e.target.value],
       })
     }
+
+    setErrors(
+      validate({
+        ...input,
+        platforms: [...input.platforms, e.target.value],
+      })
+    )
   }
 
   const handleSubmit = (e) => {
@@ -119,6 +124,7 @@ const UpdateGame = () => {
             </div>
             <div className="update_form_input">
               <label>Genres</label>
+                {errors.genres && <p className="errors">{errors.genres}</p>}
                 <select name="genres" className='create_game_select' onChange={(e) => handleSelectGenres(e)}>
                   {
                     genres.map((genre) => (

@@ -55,49 +55,64 @@ const CreateGame = () => {
         }
  }  
 
-  const handleChange = (e) => {
-    setInput({
+const handleChange = (e) => {
+  setInput({
+    ...input,
+    [e.target.name]: e.target.value,
+  })
+
+  setErrors(
+    validate({
       ...input,
       [e.target.name]: e.target.value,
     })
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    )
-  }
+  )
+}
   
-  const handleChangeGenres = (e) => {
-    setInput({
+const handleChangeGenres = (e) => {
+  setInput({
+    ...input,
+    genres: [...input.genres, e.target.value],
+  })
+
+  setErrors(
+    validate({
       ...input,
       genres: [...input.genres, e.target.value],
     })
-  }
+  )
+}
 
-  const handleChangePlatforms = (e) => {
-    setInput({
+const handleChangePlatforms = (e) => {
+  setInput({
+    ...input,
+    platforms: [...input.platforms, e.target.value],
+  })
+
+  setErrors(
+    validate({
       ...input,
-      platforms: [...input.platforms, e.target.value]
+      platforms: [...input.platforms, e.target.value],
     })
-  }
+  )
+}
 
-  const handleCancel = () => {
-    if(window.confirm('Are you sure you want to cancel?')){
-      setInput({
-        name: '',
-        description: '',
-        release_date: '',
-        rating: '',
-        image: '',
-        platforms: [],
-        genres: [],
-      })
-      setErrors({})
-    } else {
-      return;
-    }
+const handleCancel = () => {
+  if(window.confirm('Are you sure you want to cancel?')){
+    setInput({
+      name: '',
+      description: '',
+      release_date: '',
+      rating: '',
+      image: '',
+      platforms: [],
+      genres: [],
+    })
+    setErrors({})
+  } else {
+    return;
   }
+}
 
   return (
     <div>
@@ -110,12 +125,12 @@ const CreateGame = () => {
                 <div className='create_info_game'>
                   <label>Game Name</label>
                   {errors.name && <p className="errors">{errors.name}</p>}
-                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={(e) => handleChange(e)} />
+                  <input type="text" placeholder='Enter Game Name' name="name" value={input.name} onChange={(e) => handleChange(e)} required />
                 </div>
                 <div className='create_info_game'>
                   <label>Game Description</label>
                   {errors.description && <p className="errors">{errors.description}</p>}
-                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={(e) => handleChange(e)} />
+                  <input type="text" placeholder='Enter Game Description' name="description" value={input.description} onChange={(e) => handleChange(e)} required />
                 </div>
                 <div className='create_info_game'>
                   <label>Release Date</label>
@@ -127,6 +142,7 @@ const CreateGame = () => {
                 </div>
                 <div className='create_info_game'>
                   <label>Genres</label>
+                  {errors.genres && <p className="errors">{errors.genres}</p>}
                   <select className='create_game_select' onChange={(e) => handleChangeGenres(e)}>
                     {
                       genres.map((genre) => (
@@ -148,7 +164,7 @@ const CreateGame = () => {
                 <div className='create_info_game'>
                   <label>Platforms</label>
                     {errors.platforms && <p className="errors">{errors.platforms}</p>}
-                  <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)}>
+                  <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)} required >
                     <option>Select Platform</option>
                     {
                       platforms.map((platform) => (
