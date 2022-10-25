@@ -49,12 +49,9 @@ const Home = () => {
 
   const handleSortDbGames = (e) => {
     e.preventDefault()
-    if(allVideogames.length === 0) {
-      alert('No hay juegos en la base de datos')
-    } else {
-      dispatch(sortDbGames(e.target.value))
-      setOrder(e.target.value)
-    }
+    dispatch(sortDbGames(e.target.value))
+    setOrder(e.target.value)
+    setCurrentPage(1)
   }
 
   const handleSortByGenre = (e) => {
