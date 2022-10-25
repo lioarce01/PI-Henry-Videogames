@@ -12,16 +12,16 @@ import './Home.css'
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [gamesPerPage] = useState(15)
-  const [loading, setLoading] = useState(false) //eslint-disable-line
+  const [loading, setLoading] = useState(false)
   const [order, setOrder] = useState('') //eslint-disable-line
-  const [error, setError] = useState(false) //eslint-disable-line
+  const [error, setError] = useState(false) 
 
   const dispatch = useDispatch()
   const allVideogames = useSelector(state => state.games)
 
-  const indexOfLastGame = currentPage * gamesPerPage
-  const indexOfFirstGame = indexOfLastGame - gamesPerPage
-  const currentGames = allVideogames.slice(indexOfFirstGame, indexOfLastGame)
+  const indexOfLastGame = currentPage * gamesPerPage // 1 * 15 = 15
+  const indexOfFirstGame = indexOfLastGame - gamesPerPage // 15 - 15 = 0
+  const currentGames = allVideogames.slice(indexOfFirstGame, indexOfLastGame) // [0, 15] son la cantidad de juegos por pagina
 
   useEffect(() => {
     dispatch(getGenres())
@@ -49,9 +49,13 @@ const Home = () => {
 
   const handleSortDbGames = (e) => {
     e.preventDefault()
-    dispatch(sortDbGames(e.target.value))
-    setOrder(e.target.value)
-    setCurrentPage(1)
+    //si no hay juegos en la db mostrar un mensaje de error
+    if(allVideogames.length === 0) {
+      setError(true)
+    } else {
+      dispatch(sortDbGames(e.target.value))
+      setOrder(e.target.value)
+    }
   }
 
   const handleSortByGenre = (e) => {
