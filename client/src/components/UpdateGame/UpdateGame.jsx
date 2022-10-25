@@ -41,10 +41,14 @@ const UpdateGame = () => {
   }
   
   const handleSelectGenres = (e) => {
-    setInput({
-      ...input,
-      genres: [...input.genres, e.target.value],
-    })
+    if(e.target.value === 'Select Genres') {
+      return
+    } else {
+      setInput({
+        ...input,
+        genres: [...input.genres, e.target.value],
+      })
+    }
 
     setErrors(
       validate({
@@ -55,16 +59,20 @@ const UpdateGame = () => {
   }
 
   const handleSelectPlatforms = (e) => {
-    if (input.platforms.includes(e.target.value)) {
-      setInput({
-        ...input,
-        platforms: input.platforms.filter((p) => p !== e.target.value),
-      })
+    if(e.target.value === 'Select Platforms') {
+      return;
     } else {
-      setInput({
-        ...input,
-        platforms: [...input.platforms, e.target.value],
-      })
+      if (input.platforms.includes(e.target.value)) {
+        setInput({
+          ...input,
+          platforms: input.platforms.filter((p) => p !== e.target.value),
+        })
+      } else {
+        setInput({
+          ...input,
+          platforms: [...input.platforms, e.target.value],
+        })
+      }
     }
 
     setErrors(
@@ -126,6 +134,7 @@ const UpdateGame = () => {
               <label>Genres</label>
                 {errors.genres && <p className="errors">{errors.genres}</p>}
                 <select name="genres" className='create_game_select' onChange={(e) => handleSelectGenres(e)}>
+                  <option value="">Select genres</option>
                   {
                     genres.map((genre) => (
                       <option key={genre.name} value={genre.name}>{genre.name}</option>
@@ -147,6 +156,7 @@ const UpdateGame = () => {
               <label>Platforms</label>
               {errors.platforms && <p className="errors">{errors.platforms}</p>}
                 <select name="platforms" className='create_game_select' onChange={(e) => handleSelectPlatforms(e)}>
+                  <option value="">Select platforms</option>
                   {
                     platforms.map((platform) => (
                       <option key={platform} value={platform}>{platform}</option>

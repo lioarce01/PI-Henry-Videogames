@@ -70,10 +70,14 @@ const handleChange = (e) => {
 }
   
 const handleChangeGenres = (e) => {
-  setInput({
-    ...input,
-    genres: [...input.genres, e.target.value],
-  })
+  if (e.target.value === 'Select genres') {
+    return
+  } else {
+    setInput({
+      ...input,
+      genres: [...input.genres, e.target.value],
+    })
+  }
 
   setErrors(
     validate({
@@ -84,10 +88,14 @@ const handleChangeGenres = (e) => {
 }
 
 const handleChangePlatforms = (e) => {
-  setInput({
-    ...input,
-    platforms: [...input.platforms, e.target.value],
-  })
+  if(e.target.value === 'Select platforms'){
+    return
+  } else {
+    setInput({
+      ...input,
+      platforms: [...input.platforms, e.target.value],
+    }) 
+  }
 
   setErrors(
     validate({
@@ -144,6 +152,7 @@ const handleCancel = () => {
                   <label>Genres</label>
                   {errors.genres && <p className="errors">{errors.genres}</p>}
                   <select className='create_game_select' onChange={(e) => handleChangeGenres(e)}>
+                    <option value=''>Select Genre</option>
                     {
                       genres.map((genre) => (
                         <option key={genre.name} value={genre.name}>{genre.name}</option>
@@ -164,7 +173,8 @@ const handleCancel = () => {
                 <div className='create_info_game'>
                   <label>Platforms</label>
                     {errors.platforms && <p className="errors">{errors.platforms}</p>}
-                  <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)} required >
+                  <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)} required>
+                    <option value=''>Select Platform</option>
                     <option>Select Platform</option>
                     {
                       platforms.map((platform) => (
