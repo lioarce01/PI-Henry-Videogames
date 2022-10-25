@@ -174,7 +174,7 @@ const handleCancel = () => {
                   <label>Platforms</label>
                     {errors.platforms && <p className="errors">{errors.platforms}</p>}
                   <select className='create_game_select' onChange={(e) => handleChangePlatforms(e)} required>
-                    <option value='platform'>Select Platform</option>
+                    <option value='platforms'>Select Platform</option>
                     {
                       platforms.map((platform) => (
                         <option key={platform} value={platform}>{platform}</option>
