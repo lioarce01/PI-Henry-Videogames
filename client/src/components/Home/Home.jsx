@@ -49,9 +49,8 @@ const Home = () => {
 
   const handleSortDbGames = (e) => {
     e.preventDefault()
-    //si no hay juegos en la db mostrar un mensaje de error
     if(allVideogames.length === 0) {
-      setError(true)
+      alert('No hay juegos en la base de datos')
     } else {
       dispatch(sortDbGames(e.target.value))
       setOrder(e.target.value)
@@ -111,7 +110,7 @@ const Home = () => {
                  ? <Loader/>
                  : error 
                  ? <Error
-                    message="Error loading games"
+                    message="Error, no games found"
                   />
                  : currentGames?.map((game, i) => {
                     return (
