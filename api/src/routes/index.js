@@ -13,7 +13,7 @@ const router = Router();
 router.use('/videogames', videogames);
 router.use('/genres', genres);
 
-router('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Welcome to Videogames API!');
 });
 
