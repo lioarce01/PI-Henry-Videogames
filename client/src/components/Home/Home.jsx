@@ -69,9 +69,7 @@ const Home = () => {
 
   const handleReset = (e) => {
     e.preventDefault()
-    dispatch(getGameList())
-    setOrder('') 
-    setCurrentPage(1)
+    window.location.reload()
   }
 
   
