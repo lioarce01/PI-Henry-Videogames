@@ -70,7 +70,7 @@
 }
 
 .pagination_btn_prev {
-    width: 60px;
+    width: 50px;
     height: 40px;
     border: 1px solid white;
     border-bottom: 5px solid white;
@@ -84,7 +84,7 @@
 }
 
 .pagination_btn_next {
-    width: 60px;
+    width: 50px;
     height: 40px;
     border: 1px solid white;
     border-bottom: 5px solid white;
@@ -112,7 +112,7 @@
 }
 
 .btn_disabled {
-    width: 60px;
+    width: 50px;
     height: 40px;
     border: 1px solid white;
     border-radius: 5px;

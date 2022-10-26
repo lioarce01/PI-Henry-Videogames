@@ -28,8 +28,7 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    //mantener el estado de games en el store cuando se recarga la pagina o se vuelve a la home
-    if (allVideogames.length === 0) {
+    if (allVideogames.length === 0) { //esto es pasa que no se actualice la pagina cuando navego entre ellas y no se pierdan los filtros
       setLoading(true)
       dispatch(getGameList())
         .then(() => setLoading(false))
