@@ -39,10 +39,9 @@ const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogame
             }
 
             {
-              currentPage === Math.ceil(allVideogames / gamesPerPage) ?
-                <button className="btn_disabled" disabled>{'>'}</button>
-                :
-                <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)} disabled={currentPage === Math.ceil(allVideogames / gamesPerPage)}>{'>'}</button>
+              currentPage === Math.ceil(allVideogames / gamesPerPage) 
+                ? <button className="btn_disabled" disabled>{'>'}</button>
+                : <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)} disabled={currentPage === Math.ceil(allVideogames / gamesPerPage)}>{'>'}</button>
             }
           </div>
         </div>
