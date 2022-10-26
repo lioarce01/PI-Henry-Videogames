@@ -13,7 +13,7 @@ const LandingPage = () => {
                 <p className='landing_text'>This is a project made with React, Redux, Express, Sequelize and PostgreSQL</p>
                     <button className="landing_btn">
                       <Link to='/home' className='btn_link'>
-                        <span>Enter</span>
+                        Enter
                       </Link>
                     </button>
             </div>
