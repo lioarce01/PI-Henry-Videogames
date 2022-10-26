@@ -21,15 +21,28 @@ const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogame
           <div className="pagination_btns">
             {
               currentPage > 1
-                ? <button className="pagination_btn_prev" onClick={() => prevPage(currentPage - 1)}>Prev</button>
-                : <button className="btn_disabled" disabled>Prev</button>
+                ? <button className="pagination_btn_prev" onClick={() => prevPage(currentPage - 1)}>{'<'}</button>
+                : <button className="btn_disabled" disabled>{'<'}</button>
             }
-            <p className='info_pages'> Page {currentPage} of {Math.ceil(allVideogames / gamesPerPage)} </p>
+            {
+              pageNumbers.map(number => {
+                return (
+                  <button
+                    key={number}
+                    className={currentPage === number ? 'pagination_btn_active' : 'pagination_btn'}
+                    onClick={() => nextPage(number)}
+                  >
+                    {number}
+                  </button>
+                )
+              })
+            }
+
             {
               currentPage === Math.ceil(allVideogames / gamesPerPage) ?
-                <button className="btn_disabled" disabled>Next</button>
+                <button className="btn_disabled" disabled>{'>'}</button>
                 :
-                <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)} disabled={currentPage === Math.ceil(allVideogames / gamesPerPage)}>Next</button>
+                <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)} disabled={currentPage === Math.ceil(allVideogames / gamesPerPage)}>{'>'}</button>
             }
           </div>
         </div>

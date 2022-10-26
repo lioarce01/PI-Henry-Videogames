@@ -28,11 +28,14 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    setLoading(true)
-    dispatch(getGameList())
-    .then(() => setLoading(false))
-    .catch(() => setError(true))
-  }, [dispatch])
+    //mantener el estado de games en el store cuando se recarga la pagina o se vuelve a la home
+    if (allVideogames.length === 0) {
+      setLoading(true)
+      dispatch(getGameList())
+        .then(() => setLoading(false))
+        .catch(() => setError(true))
+    }
+  }, [dispatch, allVideogames.length])
 
   const handleSortName = (e) => {
     e.preventDefault()
@@ -70,9 +73,9 @@ const Home = () => {
   const handleReset = (e) => {
     e.preventDefault()
     dispatch(getGameList())
+    setOrder('')
     setCurrentPage(1)
   }
-
   
   const nextPage = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -91,6 +94,7 @@ const Home = () => {
         handleSortByGenre={handleSortByGenre}
         setCurrentPage={setCurrentPage}
         handleReset={handleReset}
+        order={order}
       />
       <Pagination
         allVideogames={allVideogames.length}
@@ -103,12 +107,8 @@ const Home = () => {
           <div className="games_container">
             <div className="games_list">
               { 
-                 loading 
-                 ? <Loader/>
-                 : error 
-                 ? <Error
-                    message="Error, no games found"
-                  />
+                 loading ? <Loader />
+                 : error ? <Error />
                  : currentGames?.map((game, i) => {
                     return (
                       <div key={i}>
@@ -117,7 +117,7 @@ const Home = () => {
                             id={game.id}
                             name={game.name}
                             image={game.image}
-                            genres={game.genres ? game.genres : 'No genres'}
+                            genres={game.genres}
                             rating={game.rating}
                             createdInDb={game.createdInDb}
                             handleDeleteGame={handleDeleteGame}

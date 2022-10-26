@@ -47,6 +47,21 @@
     margin: 0.5rem;
 }
 
+.pagination_btn_active {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    border-bottom: 5px solid white;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    margin: 0.5rem;
+    transform: scale(1.1);
+}
+
 .pagination_btn:hover {
     background-color: white;
     color: black;

@@ -27,10 +27,7 @@ export const getGameDetails = (id) => async dispatch => {
                 payload: res.data
             });
     } catch(e) {
-        dispatch({
-            type: GET_GAME_DETAILS,
-            payload: 'No game found'
-        });
+        console.log(e);
     }
 }
 

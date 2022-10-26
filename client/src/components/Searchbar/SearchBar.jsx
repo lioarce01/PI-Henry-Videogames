@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getGameByName } from '../../redux/actions'
 import './SearchBar.css'
 
-const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handleSortDbGames, handleReset }) => {
+const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handleSortDbGames, handleReset, order }) => {
     const [input, setInput] = useState('')
     const dispatch = useDispatch()
     const allGenres = useSelector(state => state.genres)
@@ -29,7 +29,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
         <div className="search_container">
             <div className="games_filters">
                 <div className="order_filter">
-                    <select className="order_select" onChange={(e) => handleSortName(e)}>
+                    <select className="order_select" onChange={(e) => handleSortName(e)} value={order}>
                         <option>Name</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
@@ -37,7 +37,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
                 </div>
 
             <div className="order_filter">
-                <select className="order_select" onChange={(e) => handleSortRating(e)}>
+                <select className="order_select" onChange={(e) => handleSortRating(e)} value={order}>
                     <option>Rating</option>
                     <option value="low">1-5</option>
                     <option value="high">5-1</option>
@@ -50,7 +50,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
             </form>
 
             <div className="order_filter">
-                <select className="order_select" onChange={(e) => handleSortDbGames(e)}>
+                <select className="order_select" onChange={(e) => handleSortDbGames(e)} value={order}>
                     <option value="all">All</option>
                     <option value="api">API</option>
                     <option value="db">DB</option>
@@ -58,7 +58,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
             </div>
 
             <div className="order_filter">
-              <select className="order_select" onChange={(e) => handleSortByGenre(e)}>
+              <select className="order_select" onChange={(e) => handleSortByGenre(e)} value={order}>
                 <option value="all">All</option>
                 {
                   allGenres.map(genre => (
