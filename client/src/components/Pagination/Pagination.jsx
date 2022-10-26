@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import './Pagination.css'
 
 const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogames}) => {
-
+  const lastPage = Math.ceil(allVideogames.length / gamesPerPage)
     useEffect(() => { 
         window.scrollTo(0, 0)
     }, [currentPage])
@@ -41,7 +41,7 @@ const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogame
             {
               currentPage === Math.ceil(allVideogames / gamesPerPage) 
                 ? <button className="btn_disabled" disabled>{'>'}</button>
-                : <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)} disabled={currentPage === Math.ceil(allVideogames / gamesPerPage)}>{'>'}</button>
+                : <button className="pagination_btn_next" onClick={() => nextPage(currentPage + 1)}>{'>'}</button>
             }
           </div>
         </div>
