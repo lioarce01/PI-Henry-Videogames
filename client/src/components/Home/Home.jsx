@@ -70,7 +70,7 @@ const Home = () => {
   const handleReset = (e) => {
     e.preventDefault()
     dispatch(getGameList())
-    setOrder('')
+    setOrder('') 
     setCurrentPage(1)
   }
 

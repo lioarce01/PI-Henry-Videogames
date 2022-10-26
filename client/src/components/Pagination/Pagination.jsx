@@ -9,7 +9,7 @@ const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogame
     }, [currentPage])
 
     const pageNumbers = []
-
+    
     for (let i = 1; i <= Math.ceil(allVideogames / gamesPerPage); i++) {
         pageNumbers.push(i)
     }

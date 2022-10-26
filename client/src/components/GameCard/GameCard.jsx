@@ -29,7 +29,7 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rati
                   </div>
                   
                   <div className="card_genres">
-                      <p>Genres:</p>
+                      <p>Genres: </p>
                       <p>
                         {
                           gameGenres
