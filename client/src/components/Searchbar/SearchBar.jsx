@@ -68,7 +68,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
               </select>
             </div>
 
-            <button className="reset_btn" onClick={(e) => handleReset(e)}>Reset Filters</button>
+            <button className="reset_btn" onClick={(e) => handleReset(e)}>Reset Filter</button>
 
           </div>
         </div>

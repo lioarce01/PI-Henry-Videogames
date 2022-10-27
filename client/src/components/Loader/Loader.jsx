@@ -7,9 +7,9 @@ const Loader = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIndex((index) => (index + 1) % loading.length) 
+            setIndex((index) => (index + 1) % loading.length)
         }, 300)
-        return () => clearInterval(interval) 
+        return () => clearInterval(interval)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
