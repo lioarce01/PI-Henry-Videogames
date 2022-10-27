@@ -41,6 +41,8 @@ const CreateGame = () => {
             dispatch(createGame(input))
             alert('Game created successfully')
             history.push('/home')
+            //recargar la pagina para que se vea el nuevo juego creado
+            window.location.reload()
             setInput({
               name: '',
               description: '',

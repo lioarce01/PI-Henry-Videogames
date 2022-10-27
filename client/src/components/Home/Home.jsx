@@ -28,11 +28,15 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    setLoading(true)
-    dispatch(getGameList())
-      .then(() => setLoading(false))
-      .catch(() => setError(true))
-  }, [dispatch])
+    if(!allVideogames.length) {
+      setLoading(true)
+      dispatch(getGameList())
+        .then(() => setLoading(false))
+        .catch(() => setError(true))
+    } else {
+      setLoading(false)
+    }
+  }, [dispatch, allVideogames.length])
 
   const handleSortName = (e) => {
     e.preventDefault()
