@@ -89,6 +89,7 @@ const UpdateGame = () => {
       dispatch(updateGame(id, input))
       alert('Game updated successfully')
       history.push(`/videogame/${id}`)
+      window.location.reload()
     } else {
       alert('Please complete all required fields')
     }

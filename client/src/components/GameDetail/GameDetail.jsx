@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader'
 import './GameDetail.css'
 
 const GameDetail = () => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const game = useSelector(state => state.game)
     const {id} = useParams()
     const dispatch = useDispatch()
@@ -19,6 +19,7 @@ const GameDetail = () => {
     const ratingStars = star.repeat(game.rating).padEnd(5, '☆')
 
     useEffect(() => {
+        setLoading(true)
         dispatch(getGameDetails(id))
             .then(() => setLoading(false))
     }, [dispatch, id])

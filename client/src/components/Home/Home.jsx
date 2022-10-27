@@ -13,8 +13,8 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [gamesPerPage] = useState(15)
   const [loading, setLoading] = useState(false)
-  const [order, setOrder] = useState('') //eslint-disable-line
-  const [error, setError] = useState(false) 
+  const [order, setOrder] = useState('')
+  const [error, setError] = useState(false)  //eslint-disable-line
 
   const dispatch = useDispatch()
   const allVideogames = useSelector(state => state.games)
@@ -28,13 +28,11 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (allVideogames.length === 0) { //esto es pasa que no se actualice la pagina cuando navego entre ellas y no se pierdan los filtros
-      setLoading(true)
-      dispatch(getGameList())
-        .then(() => setLoading(false))
-        .catch(() => setError(true))
-    }
-  }, [dispatch, allVideogames.length])
+    setLoading(true)
+    dispatch(getGameList())
+      .then(() => setLoading(false))
+      .catch(() => setError(true))
+  }, [dispatch])
 
   const handleSortName = (e) => {
     e.preventDefault()
@@ -45,22 +43,23 @@ const Home = () => {
 
   const handleSortRating = (e) => {
     e.preventDefault()
-    dispatch(sortByRating(e.target.value))
-    setOrder(e.target.value)
+      dispatch(sortByRating(e.target.value))
+      setOrder(e.target.value)
+      setCurrentPage(1)
   }
 
   const handleSortDbGames = (e) => {
     e.preventDefault()
-    dispatch(sortDbGames(e.target.value))
-    setOrder(e.target.value)
-    setCurrentPage(1)
+      dispatch(sortDbGames(e.target.value))
+      setOrder(e.target.value)
+      setCurrentPage(1)
   }
 
   const handleSortByGenre = (e) => {
     e.preventDefault()
-    dispatch(sortByGenre(e.target.value))
-    setCurrentPage(1)
-    setOrder(e.target.value)
+      dispatch(sortByGenre(e.target.value))
+      setOrder(e.target.value)
+      setCurrentPage(1)
   }
 
   const handleDeleteGame = (id) => {
@@ -107,7 +106,6 @@ const Home = () => {
             <div className="games_list">
               { 
                  loading ? <Loader />
-                 : error ? <Error />
                  : currentGames?.map((game, i) => {
                     return (
                       <div key={i}>

@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import './Pagination.css'
 
 const Pagination = ({nextPage, prevPage, currentPage, gamesPerPage, allVideogames}) => {
-  const lastPage = Math.ceil(allVideogames.length / gamesPerPage)
     useEffect(() => { 
         window.scrollTo(0, 0)
     }, [currentPage])

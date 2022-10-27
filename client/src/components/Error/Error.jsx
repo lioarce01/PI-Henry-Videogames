@@ -4,7 +4,9 @@ const Error = ({ message }) => {
 
   return (
     <div>
-      <h1 className='error'>{message}</h1>
+      <div className='error'>
+        <h1 className='error_text'>{message}</h1>
+      </div>
     </div>
   )
 }

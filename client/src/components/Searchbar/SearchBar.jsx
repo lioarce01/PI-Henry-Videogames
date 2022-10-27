@@ -58,7 +58,7 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
             </div>
 
             <div className="order_filter">
-              <select className="order_select" onChange={(e) => handleSortByGenre(e)} value={order}>
+              <select className="order_select" onChange={(e) => handleSortByGenre(e)}>
                 <option value="all">All</option>
                 {
                   allGenres.map(genre => (
