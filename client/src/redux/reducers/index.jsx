@@ -140,17 +140,10 @@ const rootReducer = (state = initialState, action) => {
 
 
         case SORT_BY_GENRE:
-            const allGames = state.games;
-            const genresFiltered = action.payload === 'all'
-            ? state.allVideogames
-            : allGames.filter(game => {
-                return game.genres.find(genre => {
-                    return genre === action.payload
-                })
-            })
+            let filterGames = state.allVideogames.filter(game => game.genres.includes(action.payload))
             return {
                 ...state,
-                games: genresFiltered
+                games: action.payload === 'all' ? state.allVideogames : filterGames
             }
 
 
