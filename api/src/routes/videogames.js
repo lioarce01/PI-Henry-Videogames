@@ -14,8 +14,9 @@ router.get('/', async (req, res) => {
             const apiGames2 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&page=2`);
             const apiGames3 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&page=3`);
             const apiGames4 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&page=4`);
+            const apiGames5 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&page=5`);
 
-            const promisedGames = await Promise.all([apiGames, apiGames2, apiGames3, apiGames4]);
+            const promisedGames = await Promise.all([apiGames, apiGames2, apiGames3, apiGames4, apiGames5]);
             
             const apiResults = promisedGames.map((game) => game.data.results);
             const flatApiResults = apiResults.flat();
@@ -58,8 +59,9 @@ router.get('/', async (req, res) => {
             const apiResult2 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&search=${name}&page=2`);
             const apiResult3 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&search=${name}&page=3`);
             const apiResult4 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&search=${name}&page=4`);
+            const apiResult5 = await axios.get(`${API_URL}?key=${process.env.API_KEY}&search=${name}&page=5`);
 
-            const promisedGames = await Promise.all([apiResult, apiResult2, apiResult3, apiResult4]);
+            const promisedGames = await Promise.all([apiResult, apiResult2, apiResult3, apiResult4, apiResult5]);
             
             const apiResults = promisedGames.map((game) => game.data.results);
             const flatApiResults = apiResults.flat();
