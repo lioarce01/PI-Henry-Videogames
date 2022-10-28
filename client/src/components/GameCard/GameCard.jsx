@@ -6,6 +6,8 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rati
   const gameGenres = genres?.map(genre => genre).slice(0, 2).join(' / ') || 'No genres'
   const star = '★'
   const ratingStars = star.repeat(rating).padEnd(5, '☆')
+  // const likeHeart = like ? '♥' : '♡'
+  const likeHeart = like === "true" ? '♥' : '♡'
 
   return (
     <Link to={`/videogame/${id}`} className='link_GC'>
@@ -27,7 +29,7 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rati
                   <div className='rating_like'>
                     <p>Rating: <span>{ratingStars}</span></p>
                     {
-                      createdInDb && <p>Like: {like}</p>
+                      createdInDb && <p>Like: {likeHeart}</p>
                     }
                   </div>
                   
