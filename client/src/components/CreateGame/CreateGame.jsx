@@ -153,11 +153,14 @@ const handleCancel = () => {
                 <div className='create_info_game'>
                   <label>Rating</label>
                   <input type="number" placeholder='Enter Valid Rating' name="rating" value={input.rating} onChange={(e) => handleChange(e)} min='0' max='5' />
+                  <label>Like</label>
+                  <input type='text' placeholder='Enter true or false' name='like' value={input.like} onChange={(e) => handleChange(e)}/>
                 </div>
                 <div>
-                  <label>
-                    <input type='text' placeholder='Enter true or false' name='like' value={input.like} onChange={(e) => handleChange(e)}/>
-                  </label>
+                {/* <div className='create_info_game'>
+                  <label>Like</label>
+                  <input type='text' placeholder='Enter true or false' name='like' value={input.like} onChange={(e) => handleChange(e)}/>
+                  </div> */}
                 </div>
                 <div className='create_info_game'>
                   <label>Genres</label>

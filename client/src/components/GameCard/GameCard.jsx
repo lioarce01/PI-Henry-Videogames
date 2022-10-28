@@ -24,13 +24,13 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rati
                     </div>
                   </div>
 
-                  <div>
+                  <div className='rating_like'>
                     <p>Rating: <span>{ratingStars}</span></p>
-                  </div>
-                  
                     {
                       createdInDb && <p>Like: {like}</p>
                     }
+                  </div>
+                  
                   <div className="card_genres">
             
 

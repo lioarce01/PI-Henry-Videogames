@@ -124,3 +124,11 @@
     color: white;
     transform: scale(1.1);
 }
+
+.rating_like {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
