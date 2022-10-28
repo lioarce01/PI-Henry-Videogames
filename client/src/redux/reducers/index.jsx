@@ -10,7 +10,8 @@ import {
     SORT_BY_GENRE,
     SORT_DB_GAMES,
     DELETE_GAME,
-    UPDATE_GAME
+    UPDATE_GAME,
+    GET_PLATFORMS
 } from '../actions/index.jsx';
 
 const initialState = {
@@ -159,6 +160,13 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 games: state.games.map(game => game.id === action.payload.id ? action.payload : game),
                 allVideogames: state.allVideogames.map(game => game.id === action.payload.id ? action.payload : game)
+            }
+
+
+        case GET_PLATFORMS:
+            return {
+                ...state,
+                platforms: action.payload
             }
 
 

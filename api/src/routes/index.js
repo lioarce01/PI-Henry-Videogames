@@ -3,6 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const videogames = require('./videogames.js');
 const genres = require('./genres.js');
+const platforms = require('./platforms.js');
 
 
 const router = Router();
@@ -12,6 +13,7 @@ const router = Router();
 
 router.use('/videogames', videogames);
 router.use('/genres', genres);
+router.use('/platforms', platforms);
 
 router.get('/', (req, res) => {
     res.send('Welcome to Videogames API!');

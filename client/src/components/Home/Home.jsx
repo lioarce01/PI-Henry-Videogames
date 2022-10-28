@@ -18,10 +18,11 @@ const Home = () => {
 
   const dispatch = useDispatch()
   const allVideogames = useSelector(state => state.games)
+  console.log(allVideogames)
 
   const indexOfLastGame = currentPage * gamesPerPage // 1 * 15 = 15
   const indexOfFirstGame = indexOfLastGame - gamesPerPage // 15 - 15 = 0
-  const currentGames = allVideogames.slice(indexOfFirstGame, indexOfLastGame) // [0, 15] son la cantidad de juegos por pagina
+  const currentGames = allVideogames.slice(indexOfFirstGame, indexOfLastGame)
 
   useEffect(() => {
     dispatch(getGenres())

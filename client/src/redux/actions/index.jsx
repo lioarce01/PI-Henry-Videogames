@@ -10,6 +10,7 @@ export const SORT_BY_GENRE = 'SORT_BY_GENRE';
 export const SORT_DB_GAMES = 'SORT_DB_GAMES';
 export const DELETE_GAME = 'DELETE_GAME';
 export const UPDATE_GAME = 'UPDATE_GAME';
+export const GET_PLATFORMS = 'GET_PLATFORMS';
 
 export const getGameList = () => async (dispatch) => {
     const res = await axios.get('/videogames');
@@ -107,7 +108,7 @@ export const deleteGame = (id) => async dispatch => {
     }
 }
 
-//UPDATE GAME FROM DATABASE WITH ID AND NEW DATA
+//UPDATE GAME FROM DB
 
 export const updateGame = (id, game) => async dispatch => {
     try {
@@ -119,4 +120,14 @@ export const updateGame = (id, game) => async dispatch => {
     } catch(e) {
         console.log(e);
     }
+}
+
+//GET PLATFORMS
+
+export const getPlatforms = () => async dispatch => {
+    const res = await axios.get('/platforms');
+    dispatch({
+        type: GET_PLATFORMS,
+        payload: res.data
+    });
 }

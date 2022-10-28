@@ -21,6 +21,7 @@ const CreateGame = () => {
   const platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'iOS', 'Android', 'Mac', 'Linux', 'Web', 'Other']
   const dispatch = useDispatch()
   const genres = useSelector((state) => state.genres)
+  // const platforms = useSelector((state) => state.platforms)
   const history = useHistory() // eslint-disable-line
 
 
