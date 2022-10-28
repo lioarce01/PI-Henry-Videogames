@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './GameCard.css'
 
-const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rating }) => {
+const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rating, like }) => {
   const gameGenres = genres?.map(genre => genre).slice(0, 2).join(' / ') || 'No genres'
   const star = '★'
   const ratingStars = star.repeat(rating).padEnd(5, '☆')
@@ -28,7 +28,12 @@ const GameCard = ({ name, image, genres, handleDeleteGame, id, createdInDb, rati
                     <p>Rating: <span>{ratingStars}</span></p>
                   </div>
                   
+                    {
+                      createdInDb && <p>Like: {like}</p>
+                    }
                   <div className="card_genres">
+            
+
                       <p>Genres: </p>
                       <p>
                         {

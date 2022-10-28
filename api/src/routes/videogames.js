@@ -47,6 +47,7 @@ router.get('/', async (req, res) => {
                     genres: game.genres.map(genre => genre.name),
                     image: game.image,
                     rating: game.rating,
+                    like: game.like,
                     createdInDb: game.createdInDb,
                 }
             })
@@ -89,6 +90,7 @@ router.get('/', async (req, res) => {
                     image: game.image,
                     rating: game.rating,
                     createdInDb: game.createdInDb,
+                    like: game.like,
                 }
             })
 
@@ -108,7 +110,7 @@ router.get('/', async (req, res) => {
 //CREATE GAME
 
 router.post('/', async (req, res) => {
-    const { image, name, genres, description, release_date, rating, platforms } = req.body;
+    const { image, name, genres, description, release_date, rating, platforms, like } = req.body;
 
     const newGame = await Videogame.create({
         image,
@@ -119,6 +121,7 @@ router.post('/', async (req, res) => {
         platforms,
         image,
         genres,
+        like,
     })
 
 
@@ -133,7 +136,7 @@ router.post('/', async (req, res) => {
     if(!name || !description || !platforms) {
         return res.status(400).json({message: 'Missing fields'})
     } else {
-        return res.status(200).json('Game created');
+        return res.status(200).json(newGame);
     }
 })
 

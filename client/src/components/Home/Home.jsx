@@ -106,11 +106,10 @@ const Home = () => {
       <div className="container_home">
           <div className="games_container">
             <div className='games_list'>
-              {
-                notFound && <Error className="not_found" />
-              }
+
               { 
                  loading ? <Loader />
+                 : notFound ? <Error className="not_found" />
                  : currentGames?.map((game, i) => {
                     return (
                       <div key={i}>
@@ -121,6 +120,7 @@ const Home = () => {
                             image={game.image}
                             genres={game.genres}
                             rating={game.rating}
+                            like={game.like}
                             createdInDb={game.createdInDb}
                             handleDeleteGame={handleDeleteGame}
                             />

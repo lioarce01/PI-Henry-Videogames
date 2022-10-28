@@ -16,6 +16,7 @@ const CreateGame = () => {
     image: '',
     platforms: [],
     genres: [],
+    like: ''
   })
 
   const platforms = ['PC', 'PlayStation', 'Xbox', 'Nintendo', 'iOS', 'Android', 'Mac', 'Linux', 'Web', 'Other']
@@ -118,7 +119,9 @@ const handleCancel = () => {
       image: '',
       platforms: [],
       genres: [],
+      like: ''
     })
+    
     setErrors({})
   } else {
     return;
@@ -145,11 +148,16 @@ const handleCancel = () => {
                 </div>
                 <div className='create_info_game'>
                   <label>Release Date</label>
-                  <input type="text" placeholder='Enter Release Date' name="release_date" value={input.release_date} onChange={(e) => handleChange(e)} />
+                  <input type="date" placeholder='Enter Release Date' name="release_date" value={input.release_date} onChange={(e) => handleChange(e)} />
                 </div>
                 <div className='create_info_game'>
                   <label>Rating</label>
                   <input type="number" placeholder='Enter Valid Rating' name="rating" value={input.rating} onChange={(e) => handleChange(e)} min='0' max='5' />
+                </div>
+                <div>
+                  <label>
+                    <input type='text' placeholder='Enter true or false' name='like' value={input.like} onChange={(e) => handleChange(e)}/>
+                  </label>
                 </div>
                 <div className='create_info_game'>
                   <label>Genres</label>

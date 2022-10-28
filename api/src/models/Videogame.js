@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
     },
+    like: {
+      type: DataTypes.STRING,
+    },
     createdInDb: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
