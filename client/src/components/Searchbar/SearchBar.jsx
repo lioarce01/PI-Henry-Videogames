@@ -7,7 +7,6 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
     const [input, setInput] = useState('')
     const dispatch = useDispatch()
     const allGenres = useSelector(state => state.genres)
-    const notFound = useSelector(state => state.notFound)
 
     const handleInputChange = (e) => {
         e.preventDefault()
@@ -23,10 +22,6 @@ const SearchBar = ({ handleSortByGenre, handleSortName, handleSortRating, handle
           dispatch(getGameByName(input))
           setInput('')
         }
-      }
-
-      if(notFound) {
-        alert('Game not found')
       }
 
   return (
