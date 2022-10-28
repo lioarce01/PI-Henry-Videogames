@@ -18,7 +18,8 @@ const Home = () => {
 
   const dispatch = useDispatch()
   const allVideogames = useSelector(state => state.games)
-  console.log(allVideogames)
+  const notFound = useSelector(state => state.notFound)
+  // console.log(allVideogames)
 
   const indexOfLastGame = currentPage * gamesPerPage // 1 * 15 = 15
   const indexOfFirstGame = indexOfLastGame - gamesPerPage // 15 - 15 = 0
@@ -29,15 +30,11 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if(!allVideogames.length) {
-      setLoading(true)
-      dispatch(getGameList())
-        .then(() => setLoading(false))
-        .catch(() => setError(true))
-    } else {
-      setLoading(false)
-    }
-  }, [dispatch, allVideogames.length])
+    setLoading(true)
+    dispatch(getGameList())
+      .then(() => setLoading(false))
+      .catch(() => setError(true))
+  }, [dispatch])
 
   const handleSortName = (e) => {
     e.preventDefault()
@@ -108,7 +105,10 @@ const Home = () => {
       />
       <div className="container_home">
           <div className="games_container">
-            <div className="games_list">
+            <div className='games_list'>
+              {
+                notFound && <Error className="not_found" />
+              }
               { 
                  loading ? <Loader />
                  : currentGames?.map((game, i) => {

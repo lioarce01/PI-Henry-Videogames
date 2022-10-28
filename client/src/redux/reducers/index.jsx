@@ -19,6 +19,7 @@ const initialState = {
     allVideogames: [], 
     game: {},
     genres: [],
+    notFound: false,
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -35,6 +36,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 games: action.payload,
                 allVideogames: action.payload,
+                notFound: false,
             }
 
 
@@ -47,9 +49,19 @@ const rootReducer = (state = initialState, action) => {
 
 
         case GET_GAME_BY_NAME:
-            return {
-                ...state,
-                games: action.payload
+            let gameByName = state.allVideogames.filter(game => game.name.toLowerCase().includes(action.payload.toLowerCase()))
+            if(gameByName.length === 0) {
+                return {
+                    ...state,
+                    games: [],
+                    notFound: true,
+                }
+            } else {
+                return {
+                    ...state,
+                    games: gameByName,
+                    notFound: false,
+                }
             }
 
 
@@ -125,8 +137,8 @@ const rootReducer = (state = initialState, action) => {
 
         case SORT_DB_GAMES:
             let filterDbGames = action.payload === 'db'
-                ? state.allVideogames.filter(game => game.createdInDb)
-                : state.allVideogames.filter(game => !game.createdInDb) 
+                ? state.allVideogames?.filter(game => game.createdInDb)
+                : state.allVideogames?.filter(game => !game.createdInDb) 
             return {
                 ...state,
                 games: action.payload === 'all' ? state.allVideogames : filterDbGames
@@ -141,24 +153,33 @@ const rootReducer = (state = initialState, action) => {
 
 
         case SORT_BY_GENRE:
-            let filterGames = state.allVideogames.filter(game => game.genres.includes(action.payload))
-            return {
-                ...state,
-                games: action.payload === 'all' ? state.allVideogames : filterGames
+            let filterGames = state.allVideogames?.filter(game => game.genres.includes(action.payload))
+            if(filterGames.length === 0) {
+                return {
+                    ...state,
+                    games: [],
+                    notFound: true,
+                }
+            } else {
+                return {
+                    ...state,
+                    games: filterGames,
+                    notFound: false,
+                }
             }
 
 
         case DELETE_GAME:
             return {
                 ...state,
-                games: state.games.filter(game => game.id !== action.payload),
+                games: state.games?.filter(game => game.id !== action.payload),
                 allVideogames: state.allVideogames.filter(game => game.id !== action.payload)
             }
 
         case UPDATE_GAME:
             return {
                 ...state,
-                games: state.games.map(game => game.id === action.payload.id ? action.payload : game),
+                games: state.games?.map(game => game.id === action.payload.id ? action.payload : game),
                 allVideogames: state.allVideogames.map(game => game.id === action.payload.id ? action.payload : game)
             }
 

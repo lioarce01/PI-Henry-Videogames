@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Error = ({ message }) => {
+const Error = () => {
 
   return (
     <div>
       <div className='error'>
-        <h1 className='error_text'>{message}</h1>
+        <h1 className='not_found'>Game not found</h1>
       </div>
     </div>
   )
